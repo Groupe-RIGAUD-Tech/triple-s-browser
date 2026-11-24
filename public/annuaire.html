@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemples de Sites Sécurisés — Triple S</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #16171a; color: #e8eaed; margin: 0; padding: 40px 20px; }
+        .container { max-width: 750px; margin: auto; background: #202124; padding: 40px; border-radius: 12px; border: 1px solid #3c4043; position: relative; }
+        .header { text-align: center; margin-bottom: 35px; }
+        .logo-small { font-size: 36px; font-weight: 800; letter-spacing: 2px; background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; margin-bottom: 5px; }
+        h1 { color: #ffffff; font-size: 22px; margin: 0 0 8px 0; font-weight: 600; }
+        p.subtitle { color: #9aa0a6; font-size: 13.5px; margin: 0; }
+        h2 { color: #D4AF37; border-bottom: 1px solid #2d2e30; padding-bottom: 8px; margin-top: 30px; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        ul { list-style-type: none; padding: 0; margin: 0; }
+        li { margin: 10px 0; padding: 10px 14px; background: #16171a; border-radius: 6px; border: 1px solid #2d2e30; display: flex; justify-content: space-between; align-items: center; }
+        li.featured { border: 1px solid #D4AF37; background: linear-gradient(90deg, rgba(212,175,55,0.08) 0%, #16171a 100%); }
+        a { color: #e8eaed; text-decoration: none; font-size: 14.5px; font-weight: 500; }
+        a:hover { color: #D4AF37; }
+        .badge { background: rgba(212, 175, 55, 0.15); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.3); font-size: 11px; padding: 2px 8px; border-radius: 4px; white-space: nowrap; margin-left: 10px; }
+        .badge-gold { background: #D4AF37; color: #16171a; font-weight: bold; font-size: 11px; padding: 2px 8px; border-radius: 4px; white-space: nowrap; margin-left: 10px; }
+        .retour { display: inline-block; margin-bottom: 20px; color: #9aa0a6; text-decoration: none; font-size: 13px; }
+        .retour:hover { color: #D4AF37; }
+        
+        /* Bloc dépliant d'aide pour la clé (Zéro JS) */
+        details { margin-top: 30px; background: #16171a; border: 1px solid #2d2e30; border-radius: 6px; padding: 10px 14px; font-size: 12.5px; color: #9aa0a6; }
+        summary { cursor: pointer; color: #D4AF37; font-weight: 600; outline: none; }
+        details p { margin: 10px 0 0 0; line-height: 1.5; color: #bdc1c6; }
+        code { background: #202124; padding: 2px 5px; border-radius: 3px; color: #e8eaed; }
+
+        .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #6c757d; }
+
+        /* Système bilingue 100% CSS */
+        input[name="lang"] { display: none; }
+        .lang-switch { position: absolute; top: 25px; right: 30px; display: flex; gap: 6px; }
+        .lang-switch label { cursor: pointer; padding: 4px 10px; font-size: 12px; border-radius: 4px; color: #6c757d; border: 1px solid #3c4043; font-weight: bold; }
+        #lang-fr:checked ~ .lang-switch label[for="lang-fr"],
+        #lang-en:checked ~ .lang-switch label[for="lang-en"] { color: #D4AF37; border-color: #D4AF37; background-color: #16171a; }
+        #lang-fr:checked ~ .en { display: none !important; }
+        #lang-en:checked ~ .fr { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sélecteur de langue -->
+        <input type="radio" name="lang" id="lang-fr" checked>
+        <input type="radio" name="lang" id="lang-en">
+        <div class="lang-switch">
+            <label for="lang-fr">FR</label>
+            <label for="lang-en">EN</label>
+        </div>
+
+        <!-- ================= VERSION FRANÇAISE ================= -->
+        <div class="fr">
+            <a class="retour" href="sss://127.0.0.1/index.html">⬅ Retour à la recherche Triple S</a>
+            
+            <div class="header">
+                <div class="logo-small">SSS</div>
+                <h1>Exemples de Sites Compatibles</h1>
+                <p class="subtitle">Sélection de solutions souveraines, portails officiels et bases de connaissances 100% statiques.</p>
+            </div>
+
+            <h2>⭐ Solutions Souveraines & IA Locale (Favori)</h2>
+            <ul>
+                <li class="featured">
+                    <a href="sss://127.0.0.1/mon_site_sss.html"><b>Groupe RIGAUD Tech</b> — IA Locale, Formation, Installation & Audit</a>
+                    <span class="badge-gold">Domaine Natif SSS</span>
+                </li>
+            </ul>
+
+            <h2>Services Officiels de l'État</h2>
+            <ul>
+                <li><a href="https://www.service-public.fr">Service-Public.fr</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://www.impots.gouv.fr">Impôts.gouv.fr</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://www.cnil.fr">CNIL (Protection des données)</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://www.data.gouv.fr">Data.gouv.fr (Données publiques)</a><span class="badge">Vérifié</span></li>
+            </ul>
+
+            <h2>Connaissance & Documentation</h2>
+            <ul>
+                <li><a href="https://fr.wikipedia.org">Wikipédia France</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://fr.wiktionary.org">Wiktionnaire (Dictionnaire)</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://fr.wikisource.org">Wikisource (Bibliothèque libre)</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://fr.wikibooks.org">Wikibooks (Livres pédagogiques)</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://docs.python.org/fr/3/">Documentation Python (Français)</a><span class="badge">Vérifié</span></li>
+                <li><a href="https://developer.mozilla.org/fr/">MDN Web Docs (Développement web)</a><span class="badge">Vérifié</span></li>
+            </ul>
+
+            <details>
+                <summary>🔑 Aide : Comment retrouver ou recréer ma clé cryptographique ?</summary>
+                <p>Par mesure de confidentialité absolue (Zéro collecte), Groupe RIGAUD Tech ne détient aucune copie de votre clé. Elle est stockée uniquement sur votre ordinateur dans le fichier <code>.identite_sss.json</code> de votre dossier utilisateur. Si vous avez perdu votre clé papier et souhaitez en générer une nouvelle, supprimez simplement ce fichier et relancez le navigateur.</p>
+            </details>
+
+            <div class="footer">
+                🛡️ Groupe RIGAUD Tech SASU — Protocole Triple S V1.0
+            </div>
+        </div>
+
+        <!-- ================= VERSION ANGLAISE ================= -->
+        <div class="en">
+            <a class="retour" href="sss://127.0.0.1/index.html">⬅ Back to Triple S Search</a>
+            
+            <div class="header">
+                <div class="logo-small">SSS</div>
+                <h1>Verified Compatible Websites</h1>
+                <p class="subtitle">Curated directory of sovereign solutions, official portals and 100% static knowledge bases.</p>
+            </div>
+
+            <h2>⭐ Sovereign Solutions & Local AI (Featured)</h2>
+            <ul>
+                <li class="featured">
+                    <a href="sss://127.0.0.1/mon_site_sss.html"><b>Groupe RIGAUD Tech</b> — Local AI, Training, Deployment & Security Audit</a>
+                    <span class="badge-gold">Native SSS Domain</span>
+                </li>
+            </ul>
+
+            <h2>Official Public Portals & Privacy</h2>
+            <ul>
+                <li><a href="https://www.usa.gov">USA.gov (Official US Government Portal)</a><span class="badge">Verified</span></li>
+                <li><a href="https://www.gov.uk">GOV.UK (United Kingdom Public Services)</a><span class="badge">Verified</span></li>
+                <li><a href="https://www.cnil.fr/en">CNIL (Data Protection Authority)</a><span class="badge">Verified</span></li>
+                <li><a href="https://www.service-public.fr">Service-Public.fr (French Administration)</a><span class="badge">Verified</span></li>
+            </ul>
+
+            <h2>Knowledge, Education & Documentation</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org">Wikipedia (Free Encyclopedia)</a><span class="badge">Verified</span></li>
+                <li><a href="https://en.wiktionary.org">Wiktionary (Dictionary)</a><span class="badge">Verified</span></li>
+                <li><a href="https://en.wikibooks.org">Wikibooks (Open-content Textbooks)</a><span class="badge">Verified</span></li>
+                <li><a href="https://docs.python.org/3/">Python 3 Official Documentation</a><span class="badge">Verified</span></li>
+                <li><a href="https://developer.mozilla.org/en-US/">MDN Web Docs (Web Standards)</a><span class="badge">Verified</span></li>
+                <li><a href="https://news.ycombinator.com">Hacker News (Tech & Science)</a><span class="badge">Verified</span></li>
+                <li><a href="https://npr.org/sections/news/">NPR Text (International News)</a><span class="badge">Verified</span></li>
+            </ul>
+
+            <details>
+                <summary>🔑 Help: How to find or reset my cryptographic key?</summary>
+                <p>For strict privacy reasons (Zero data collection), Groupe RIGAUD Tech never stores a copy of your key. It is stored locally on your computer inside the <code>.identite_sss.json</code> file in your user folder. If you need to generate a brand new key, simply delete this file and restart the browser.</p>
+            </details>
+
+            <div class="footer">
+                🛡️ Groupe RIGAUD Tech SASU — Triple S Protocol V1.0
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

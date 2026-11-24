@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Triple S : un navigateur sans JavaScript qui réduit la surface d'attaque. Téléchargement vérifiable (signature numérique et empreinte SHA-256).">
+    <title>Télécharger le Navigateur Triple S — Groupe RIGAUD Tech</title>
+    <style>
+        :root {
+            --bg: #16171a;
+            --panel: #202124;
+            --border: #3c4043;
+            --text: #e8eaed;
+            --muted: #b0b5ba;
+            --gold: #D4AF37;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 16px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 720px;
+            background: var(--panel);
+            padding: 44px 40px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+        }
+        .logo {
+            font-size: 72px;
+            font-weight: 800;
+            margin: 0 0 6px 0;
+            letter-spacing: 3px;
+            text-align: center;
+            color: var(--gold);
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h1 {
+            color: #ffffff;
+            margin: 0 0 24px 0;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+        h2 {
+            color: #ffffff;
+            font-size: 18px;
+            margin: 34px 0 12px 0;
+        }
+        p, li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+        p { margin: 0 0 16px 0; }
+        ul, ol { padding-left: 22px; margin: 0 0 16px 0; }
+        code {
+            background: #16171a;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 13px;
+            color: #e8eaed;
+            word-break: break-all;
+        }
+        pre {
+            background: #16171a;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 14px;
+            overflow-x: auto;
+            font-size: 13px;
+            color: #e8eaed;
+            margin: 0 0 16px 0;
+        }
+        .box {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            padding: 16px 20px;
+            margin: 26px 0;
+            border-radius: 6px;
+        }
+        .box h3 {
+            color: var(--gold);
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .box p:last-child { margin-bottom: 0; }
+        .limits { border-left-color: #8ab4f8; }
+        .limits h3 { color: #8ab4f8; }
+        .center { text-align: center; }
+        .btn-download {
+            display: inline-block;
+            background: linear-gradient(135deg, #BF953F 0%, #D4AF37 100%);
+            color: #16171a;
+            padding: 15px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 6px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-download:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+        }
+        .btn-download:focus-visible, a:focus-visible, summary:focus-visible {
+            outline: 3px solid #8ab4f8;
+            outline-offset: 3px;
+        }
+        .meta {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+        details {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 0 0 16px 0;
+            background: var(--bg);
+        }
+        summary {
+            cursor: pointer;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        details[open] summary { margin-bottom: 12px; }
+        a { color: #8ab4f8; }
+        .footer {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid #2d2e30;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+            text-align: center;
+        }
+        .footer strong { color: #e8eaed; }
+        @media (max-width: 520px) {
+            .container { padding: 30px 20px; }
+            .logo { font-size: 56px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-download { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="logo" aria-hidden="true">SSS</div>
+        <h1>Le navigateur sans JavaScript</h1>
+
+        <p>Triple S est un navigateur qui <strong>n'exécute aucun script</strong> (JavaScript) sur les domaines <code>sss://</code>. Une grande partie des attaques et du pistage publicitaire passe par ces scripts : en les bloquant à la racine, Triple S réduit fortement la surface d'attaque par rapport à un navigateur classique.</p>
+
+        <p>Les services qui reposent sur des scripts ne fonctionnent donc pas sur ce réseau. Triple S développe des alternatives sans script pour les usages essentiels.</p>
+
+        <div class="box">
+            <h3>🔑 Identité cryptographique locale</h3>
+            <p>Aucun compte, e-mail ni mot de passe n'est demandé au téléchargement. Au premier lancement, le navigateur génère <strong>sur votre ordinateur</strong> une clé unique de 32 caractères (entropie 162 bits), qui vous sert à vous authentifier et à valider vos opérations sur les domaines <code>sss://</code>. Conservez-la dans un endroit sûr et ne la communiquez à personne.</p>
+        </div>
+
+        <div class="box limits">
+            <h3>Ce que Triple S ne fait pas</h3>
+            <p>Triple S est une couche de protection supplémentaire, pas une protection totale :</p>
+            <ul>
+                <li>Il ne détecte pas les faux sites ni les arnaques par formulaire : une page sans script peut quand même tromper un utilisateur.</li>
+                <li>Il ne protège pas vos autres applications ni votre navigation hors <code>sss://</code>.</li>
+                <li>Comme tout logiciel, il peut contenir des failles. Nous les corrigeons et vous invitons à nous les signaler (voir en bas de page).</li>
+            </ul>
+        </div>
+
+        <h2>Télécharger</h2>
+        <div class="center">
+            <a href="fichiers/installer_triple_s.exe" class="btn-download" download>Télécharger l'installateur pour Windows</a>
+            <p class="meta">Version 1.0.0 · 378,3 Mo · publié le 24 novembre 2026<br>Windows 10 / Windows 11 (64 bits)</p>
+        </div>
+
+        <h2>Installation en 3 étapes</h2>
+        <ol>
+            <li>Vérifiez le fichier (voir ci-dessous) avant de l'ouvrir.</li>
+            <li>Lancez l'installateur et choisissez, si vous le souhaitez, <strong>« Créer un raccourci sur le bureau »</strong>.</li>
+            <li>Au premier lancement, notez votre clé cryptographique et rangez-la en lieu sûr.</li>
+        </ol>
+
+        <h2>Vérifier le fichier avant de l'ouvrir</h2>
+        <p>Ne lancez jamais un programme téléchargé sans le vérifier. Deux contrôles prennent une minute :</p>
+
+        <details>
+            <summary>1. Contrôler l'empreinte SHA-256</summary>
+            <p>Dans PowerShell, placez-vous dans le dossier de téléchargement et lancez :</p>
+            <pre>Get-FileHash .\installer_triple_s.exe -Algorithm SHA256</pre>
+            <p>Le résultat doit être identique à l'empreinte publiée ici :</p>
+            <p><code>E7860C4499BEAC54D09E137B3B6E288DCECD1441C9DF3D5A2B3B1D568918BDD4</code></p>
+            <p>Si les deux valeurs diffèrent, ne l'ouvrez pas et contactez-nous.</p>
+        </details>
+
+        <details>
+        <summary>2. Avertissement Windows SmartScreen (Version 1.0)</summary>
+        <p>Le certificat de signature de code est en cours de déploiement. Si Windows affiche un avertissement SmartScreen, vérifiez d'abord l'empreinte SHA-256 ci-dessus, puis cliquez sur <strong>Informations complémentaires</strong> &gt; <strong>Exécuter quand même</strong>.</p>
+        </details>
+
+        <div class="footer">
+            <strong>Édité par Groupe RIGAUD Tech SASU</strong> — 230 route des Dolines, 06560 Sophia Antipolis, France<br>
+            Signaler une vulnérabilité ou poser une question : <a href="mailto:contact@grouperigaudtech.fr">contact@grouperigaudtech.fr</a><br>
+            <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Politique de confidentialité</a><br>
+            Cette page n'utilise aucun script.
+        </div>
+    </main>
+</body>
+</html>

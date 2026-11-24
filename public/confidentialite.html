@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+    <meta name="referrer" content="no-referrer">
+    <title>Politique de Confidentialité — Navigateur Triple S | Groupe RIGAUD Tech</title>
+    <style>
+        :root {
+            --bg: #16171a;
+            --panel: #202124;
+            --border: #3c4043;
+            --text: #e8eaed;
+            --muted: #b0b5ba;
+            --gold: #D4AF37;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 16px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 720px;
+            background: var(--panel);
+            padding: 44px 40px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+        }
+        .retour {
+            display: inline-block;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #ffffff;
+            margin: 0 0 24px 0;
+            font-size: 24px;
+            font-weight: 600;
+            border-bottom: 1px solid #2d2e30;
+            padding-bottom: 14px;
+        }
+        h2 {
+            color: var(--gold);
+            font-size: 17px;
+            margin: 28px 0 10px 0;
+        }
+        p, li {
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+        p { margin: 0 0 14px 0; }
+        ul { padding-left: 22px; margin: 0 0 16px 0; }
+        code {
+            background: #16171a;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 13px;
+            color: #e8eaed;
+        }
+        a { color: #8ab4f8; }
+        .footer {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid #2d2e30;
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <a href="telechargement.html" class="retour">⬅ Retour à la page de téléchargement</a>
+        <h1>Politique de Confidentialité (RGPD)</h1>
+
+        <p><strong>Groupe RIGAUD Tech SASU</strong> applique le principe de protection des données dès la conception (<em>Privacy by Design</em>, article 25 du Règlement Général sur la Protection des Données — RGPD). Voici le détail exact des traitements liés à cette page et au logiciel <strong>Navigateur Triple S</strong>.</p>
+
+        <h2>1. Absence de cookies et de traceurs sur cette page</h2>
+        <p>Cette page de téléchargement est statique et n'exécute aucun script JavaScript. Elle ne dépose aucun cookie publicitaire, de pistage ou de mesure d'audience sur votre terminal.</p>
+
+        <h2>2. Stockage 100 % local de la clé cryptographique</h2>
+        <ul>
+            <li><strong>Génération locale :</strong> Au premier lancement du navigateur Triple S, une clé aléatoire de 52 caractères est générée localement sur votre ordinateur et enregistrée dans votre dossier utilisateur sous le nom <code>.identite_sss.json</code>.</li>
+            <li><strong>Zéro base de données centrale :</strong> Groupe RIGAUD Tech SASU ne reçoit, ne collecte et ne stocke aucune copie de cette clé ni des informations que vous pourriez renseigner manuellement dans ce fichier local.</li>
+            <li><strong>Précaution de sécurité :</strong> Le fichier <code>.identite_sss.json</code> étant stocké en clair dans votre session utilisateur Windows, sa confidentialité dépend de la sécurité de votre session Windows. Vous pouvez le supprimer à tout moment pour effacer votre clé ou en générer une nouvelle.</li>
+        </ul>
+
+        <h2>3. Vérification de mise à jour et journaux serveur</h2>
+        <ul>
+            <li><strong>Vérification de version :</strong> Au démarrage, le navigateur consulte le fichier public <code>https://grouperigaudtech.fr/fichiers/version.txt</code> uniquement pour vérifier si une mise à jour de sécurité est disponible. Aucune donnée personnelle ni clé d'identité n'est transmise lors de cette requête.</li>
+            <li><strong>Journaux techniques d'hébergement :</strong> Lors du téléchargement de l'installateur, notre hébergeur web enregistre de manière standard les journaux techniques de connexion (adresse IP, horodatage) à des fins exclusives de sécurité réseau et de prévention des attaques par déni de service (conservation légale maximale de 12 mois).</li>
+        </ul>
+
+        <h2>4. Échanges par courrier électronique et droits RGPD</h2>
+        <p>Si vous nous contactez par e-mail à l'adresse <a href="mailto:contact@grouperigaudtech.fr">contact@grouperigaudtech.fr</a> (support, signalement de vulnérabilité ou demande commerciale), votre adresse e-mail et le contenu de votre message sont utilisés exclusivement pour répondre à votre demande.</p>
+        <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et d'effacement des messages que vous nous avez adressés, en écrivant à : <strong>contact@grouperigaudtech.fr</strong> (ou par courrier au 230 route des Dolines, 06560 Sophia Antipolis). En cas de litige, vous avez le droit d'introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" rel="noreferrer">www.cnil.fr</a>).</p>
+
+        <div class="footer">
+            <strong>Groupe RIGAUD Tech SASU</strong> — 230 route des Dolines, 06560 Sophia Antipolis, France<br>
+            <a href="telechargement.html">Téléchargement</a> · <a href="mentions-legales.html">Mentions légales</a>
+        </div>
+    </main>
+</body>
+</html>
