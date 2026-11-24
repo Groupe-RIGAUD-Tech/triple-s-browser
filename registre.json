@@ -2,10 +2,11 @@
     "grt.sss": {
         "mode": "https_statique",
         "cible": "https://www.grouperigaudtech.fr/sss/",
-        "siret": "10285710900015"
+        "id_legal": "FR-SIRET-10285710900015"
     },
-    "demo.sss": {
-        "mode": "local",
-        "fichier": "/mon_site_sss.html"
+    "swiss-partner.sss": {
+        "mode": "https_statique",
+        "cible": "https://www.swiss-partner.ch/sss/",
+        "id_legal": "CH-UID-CHE123456789"
     }
 }
