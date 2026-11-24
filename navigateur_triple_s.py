@@ -143,19 +143,67 @@ class NavigateurSSS(QMainWindow):
             self.moteur.setUrl(QUrl(url_moteur))
 
     def charger_reseau_sss(self, url):
-        # Traduction de ton domaine officiel vers ton fichier local
-        if url.startswith("sss://grt.sss") or url.startswith("sss://sss.grt.sss"):
-            url = "sss://127.0.0.1/mon_site_sss.html"
+        # Découpage de l'URL : sss://domaine/chemin
+        sans_protocole = url.replace("sss://", "", 1)
+        if "/" in sans_protocole:
+            domaine, reste = sans_protocole.split("/", 1)
+            chemin = "/" + reste
+        else:
+            domaine = sans_protocole
+            chemin = "/index.html"
 
-        contexte = ssl._create_unverified_context()
+        if chemin == "/":
+            chemin = "/index.html"
+
+        domaine = domaine.lower()
+
+        # 1. Vérification dans le registre officiel .sss
+        if domaine in REGISTRE_SSS:
+            entree = REGISTRE_SSS[domaine]
+            mode = entree.get("mode")
+
+            # MODE 1 : Hébergement sur le domaine HTTPS actuel du client
+            if mode == "https_statique":
+                cible = entree["cible"].rstrip("/")
+                url_distante = f"{cible}{chemin}"
+                try:
+                    req = urllib.request.Request(url_distante, headers={"User-Agent": "TripleS-Browser/1.1"})
+                    reponse = urllib.request.urlopen(req, timeout=5)
+                    html_brut = reponse.read().decode('utf-8', errors='ignore')
+                    self.moteur.setHtml(html_brut, QUrl(url))
+                    return
+                except Exception as erreur:
+                    msg = f"<h1 style='color:red;'>Site SSS inaccessible</h1><p>{str(erreur)}</p>"
+                    self.moteur.setHtml(msg, QUrl(url))
+                    return
+
+            # MODE 2 : Fichier embarqué en local
+            elif mode == "local":
+                domaine = "127.0.0.1"
+                chemin = entree.get("fichier", "/index.html")
+
+            # MODE 3 : Serveur SSS distant (port 1965)
+            elif mode == "noeud_sss":
+                ip_cible = entree.get("ip", "127.0.0.1")
+                port_cible = entree.get("port", 1965)
+                self._requete_tcp_sss(ip_cible, port_cible, chemin, url)
+                return
+
+        # 2. Connexion locale directe (127.0.0.1)
+        if domaine == "127.0.0.1":
+            self._requete_tcp_sss("127.0.0.1", 1965, chemin, url)
+        else:
+            msg = (
+                f"<h1 style='color:#D4AF37;'>Domaine non enregistré : {domaine}</h1>"
+                f"<p>Ce domaine <code>.sss</code> n'existe pas encore dans le registre souverain.</p>"
+                f"<p>Pour le réserver gratuitement (1er millier offert aux entreprises) : <b>contact@grouperigaudtech.fr</b></p>"
+            )
+            self.moteur.setHtml(msg, QUrl(url))
+
+    def _requete_tcp_sss(self, ip, port, chemin, url_originale):
         try:
-            connexion = socket.create_connection(('127.0.0.1', 1965), timeout=5)
-
-            chemin = url.replace("sss://127.0.0.1", "")
-            if not chemin or chemin == "/":
-                chemin = "/index.html"
-
-            requete = f"sss://127.0.0.1{chemin}\r\n"
+            connexion = socket.create_connection((ip, port), timeout=5)
+            requete = f"sss://{ip}{chemin}\r\n"
             connexion.sendall(requete.encode('utf-8'))
 
             frag = []
@@ -167,18 +215,35 @@ class NavigateurSSS(QMainWindow):
             connexion.close()
 
             reponse = b"".join(frag).decode('utf-8', errors='ignore')
-
             lignes = reponse.split('\r\n', 1)
             html_brut = lignes[1] if len(lignes) > 1 else reponse
-
-            self.moteur.setHtml(html_brut, QUrl(url))
-
+            self.moteur.setHtml(html_brut, QUrl(url_originale))
         except Exception as erreur:
-            message_erreur = f"<h1 style='color:red;'>Erreur de connexion SSS</h1><p>{str(erreur)}</p>"
-            self.moteur.setHtml(message_erreur, QUrl(url))
+            msg = f"<h1 style='color:red;'>Erreur de connexion SSS</h1><p>{str(erreur)}</p>"
+            self.moteur.setHtml(msg, QUrl(url_originale))
 
 VERSION_ACTUELLE = "1.0.0"
 URL_VERSION = "https://grouperigaudtech.fr/fichiers/version.txt"
+
+URL_REGISTRE = "https://grouperigaudtech.fr/fichiers/registre.json"
+
+# Registre par défaut si hors-ligne ou avant la mise en ligne du fichier
+REGISTRE_SSS = {
+    "grt.sss": {"mode": "local", "fichier": "/mon_site_sss.html"},
+    "sss.grt.sss": {"mode": "local", "fichier": "/mon_site_sss.html"}
+}
+
+def charger_registre():
+    global REGISTRE_SSS
+    try:
+        req = urllib.request.Request(URL_REGISTRE, headers={"User-Agent": "TripleS-Browser/1.1"})
+        reponse = urllib.request.urlopen(req, timeout=3)
+        contenu = reponse.read().decode('utf-8').strip()
+        if contenu.startswith("{"):
+            donnees = json.loads(contenu)
+            REGISTRE_SSS.update(donnees)
+    except Exception:
+        pass
 
 def verifier_mise_a_jour():
     try:
@@ -273,8 +338,10 @@ if __name__ == '__main__':
     
     # 2. On lance l'interface graphique ensuite
     app = QApplication(sys.argv)
-    initialiser_identite_crypto()  # <-- Génère la clé au 1er lancement uniquement
+    initialiser_identite_crypto()
     verifier_mise_a_jour()
+    charger_registre()
+    
     fenetre = NavigateurSSS()
     fenetre.show()
     sys.exit(app.exec())
