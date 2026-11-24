@@ -222,7 +222,7 @@ class NavigateurSSS(QMainWindow):
             msg = f"<h1 style='color:red;'>Erreur de connexion SSS</h1><p>{str(erreur)}</p>"
             self.moteur.setHtml(msg, QUrl(url_originale))
 
-VERSION_ACTUELLE = "1.0.0"
+VERSION_ACTUELLE = "1.1.0"
 URL_VERSION = "https://grouperigaudtech.fr/fichiers/version.txt"
 
 URL_REGISTRE = "https://grouperigaudtech.fr/fichiers/registre.json"
