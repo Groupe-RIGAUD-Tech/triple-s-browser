@@ -157,6 +157,11 @@ class NavigateurSSS(QMainWindow):
 
         domaine = domaine.lower()
 
+        # Annuaire dynamique généré directement depuis registre.json (Zéro-JS)
+        if chemin == "/annuaire.html" or domaine == "annuaire.sss":
+            self.moteur.setHtml(self.generer_annuaire_html(), QUrl("sss://annuaire.sss"))
+            return
+
         # 1. Vérification dans le registre officiel .sss
         if domaine in REGISTRE_SSS:
             entree = REGISTRE_SSS[domaine]
@@ -221,6 +226,34 @@ class NavigateurSSS(QMainWindow):
         except Exception as erreur:
             msg = f"<h1 style='color:red;'>Erreur de connexion SSS</h1><p>{str(erreur)}</p>"
             self.moteur.setHtml(msg, QUrl(url_originale))
+
+    def generer_annuaire_html(self):
+        lignes_html = ""
+        for dom, infos in REGISTRE_SSS.items():
+            if dom in ("sss.grt.sss", "demo.sss"):
+                continue
+            id_legal = infos.get("id_legal", infos.get("siret", "Vérifié"))
+            mode = infos.get("mode", "https_statique")
+            lignes_html += (
+                f"<div style='background:#151c2c; border:1px solid #26334d; border-radius:8px; padding:16px; margin-bottom:12px;'>"
+                f"<a href='sss://{dom}' style='color:#D4AF37; font-size:18px; font-weight:bold; text-decoration:none;'>sss://{dom}</a>"
+                f"<div style='color:#94a3b8; font-size:13px; margin-top:6px;'>Identifiant légal : {id_legal} • Mode : {mode}</div>"
+                f"</div>"
+            )
+
+        if not lignes_html:
+            lignes_html = "<p style='color:#94a3b8;'>Aucun domaine enregistré pour le moment.</p>"
+
+        return f"""
+        <html>
+        <body style="background:#0a0a0a; color:#e8eaed; font-family:Segoe UI, sans-serif; padding:40px; max-width:800px; margin:auto;">
+            <a href="sss://127.0.0.1/index.html" style="color:#94a3b8; text-decoration:none;">← Retour Accueil</a>
+            <h1 style="color:#D4AF37; margin-top:20px;">Annuaire Officiel Triple S</h1>
+            <p style="color:#94a3b8; margin-bottom:30px;">Domaines souverains vérifiés et synchronisés en direct depuis le registre.</p>
+            {lignes_html}
+        </body>
+        </html>
+        """        
 
 VERSION_ACTUELLE = "1.1.0"
 URL_VERSION = "https://grouperigaudtech.fr/fichiers/version.txt"
@@ -345,3 +378,4 @@ if __name__ == '__main__':
     fenetre = NavigateurSSS()
     fenetre.show()
     sys.exit(app.exec())
+
