@@ -2,7 +2,7 @@
     "grt.sss": {
         "mode": "https_statique",
         "cible": "https://www.grouperigaudtech.fr/sss/",
-        "siret": "102 857 109 00015"
+        "siret": "10285710900015"
     },
     "demo.sss": {
         "mode": "local",
