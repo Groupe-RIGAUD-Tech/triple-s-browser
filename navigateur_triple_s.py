@@ -1,3 +1,4 @@
+import re
 import sys
 import socket
 import ssl
@@ -255,7 +256,7 @@ class NavigateurSSS(QMainWindow):
         </html>
         """        
 
-VERSION_ACTUELLE = "1.1.0"
+VERSION_ACTUELLE = "1.2.0"
 URL_VERSION = "https://grouperigaudtech.fr/fichiers/version.txt"
 
 URL_REGISTRE = "https://grouperigaudtech.fr/fichiers/registre.json"
@@ -269,7 +270,7 @@ REGISTRE_SSS = {
 def charger_registre():
     global REGISTRE_SSS
     try:
-        req = urllib.request.Request(URL_REGISTRE, headers={"User-Agent": "TripleS-Browser/1.1"})
+        req = urllib.request.Request(URL_REGISTRE, headers={"User-Agent": "TripleS-Browser/1.2"})
         reponse = urllib.request.urlopen(req, timeout=3)
         contenu = reponse.read().decode('utf-8').strip()
         if contenu.startswith("{"):
