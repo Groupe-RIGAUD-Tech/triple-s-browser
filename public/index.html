@@ -12,7 +12,7 @@
         .buttons { margin-top: 28px; display: flex; gap: 12px; justify-content: center; }
         .btn { background-color: #303134; border: 1px solid transparent; color: #e8eaed; padding: 10px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; text-decoration: none; }
         .btn:hover { border: 1px solid #5f6368; }
-        .note-bas { color: #6c757d; font-size: 12px; text-align: center; }
+        .note-bas { color: #6c757d; font-size: 12px; text-align: center;  }
         .lien-or { color: #D4AF37; text-decoration: none; }
 
         /* Ligne dépliante très fine pour la clé cryptographique */
@@ -23,17 +23,14 @@
         .contenu-cle b { color: #e8eaed; }
         .contenu-cle code { background: #202124; color: #D4AF37; padding: 2px 5px; border-radius: 3px; }
 
-        /* Système bilingue 100% CSS par conteneurs */
+        /* Système bilingue 100% CSS */
         input[name="lang"] { display: none; }
         .lang-switch { position: absolute; top: 20px; right: 30px; display: flex; gap: 6px; }
         .lang-switch label { cursor: pointer; padding: 4px 10px; font-size: 12px; border-radius: 4px; color: #6c757d; border: 1px solid #3c4043; font-weight: bold; }
         #lang-fr:checked ~ .lang-switch label[for="lang-fr"],
         #lang-en:checked ~ .lang-switch label[for="lang-en"] { color: #D4AF37; border-color: #D4AF37; background-color: #16171a; }
-
-        .bloc-langue { width: 100%; display: flex; flex-direction: column; align-items: center; }
-        .bloc-langue.en { display: none; }
-        #lang-en:checked ~ .bloc-langue.fr { display: none; }
-        #lang-en:checked ~ .bloc-langue.en { display: flex; }
+        #lang-fr:checked ~ .en { display: none !important; }
+        #lang-en:checked ~ .fr { display: none !important; }
     </style>
 </head>
 <body>
@@ -49,70 +46,66 @@
     <h1 class="logo-or">SSS</h1>
 
     <!-- ================= VERSION FRANÇAISE ================= -->
-    <div class="bloc-langue fr">
-        <form action="sss://127.0.0.1/recherche" method="GET" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-            <div class="search-container">
-                <input type="text" name="q" class="search-box" placeholder="Rechercher sur le web statique...">
-            </div>
-            <div class="buttons">
-                <button type="submit" class="btn">Recherche Triple S</button>
-                <a href="sss://127.0.0.1/annuaire.html" class="btn" style="padding-top: 12px; box-sizing: border-box;">Exemples des sites sécurisés</a>
-            </div>
-        </form>
+    <form class="fr" action="sss://127.0.0.1/recherche" method="GET" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="search-container">
+            <input type="text" name="q" class="search-box" placeholder="Rechercher sur le web statique...">
+        </div>
+        <div class="buttons">
+            <button type="submit" class="btn">Recherche Triple S</button>
+            <a href="sss://127.0.0.1/annuaire.html" class="btn" style="padding-top: 12px; box-sizing: border-box;">Annuaire des domaines Triple S</a>
+        </div>
+    </form>
 
-        <p class="note-bas" style="margin-top: 100px; margin-bottom: 6px;">
-            🛡️ <b>Protection SSS active :</b> Les fichiers exécutables et scripts sont bloqués. Un écran noir ou une fonction inactive est normal sur les sites non conformes SSS.
-        </p>
-        <p class="note-bas" style="margin-top: 0; margin-bottom: 4px;">
-            🏢 <b>Entreprises :</b> Tout site <code>www</code> déjà codé en HTML statique s'affiche nativement sur Triple S. Pour convertir un site dynamique ou protéger votre base clients : <b class="lien-or">contact@grouperigaudtech.fr</b>
-        </p>
-        <p class="note-bas" style="margin-top: 0; margin-bottom: 4px;">
-            🌐 <b>Domaines Souverains (<code>sss://</code>) :</b> Ouverture prochaine de l'enregistrement officiel des noms de domaine <code>.sss</code> (premiers domaines d'entreprise attribués gratuitement sur dossier) — Pré-réservation : <b class="lien-or">contact@grouperigaudtech.fr</b>
-        </p>
+    <p class="fr note-bas" style="margin-top: 100px; margin-bottom: 6px;">
+        🛡️ <b>Protection SSS active :</b> Les fichiers exécutables et scripts sont bloqués. Un écran noir ou une fonction inactive est normal sur les sites non conformes SSS.
+    </p>
+    <p class="fr note-bas" style="margin-top: 0; margin-bottom: 4px;">
+    🏢 <b>Entreprises :</b> Tout site <code>www</code> déjà codé en HTML statique s'affiche nativement sur Triple S. Pour convertir un site dynamique ou protéger votre base clients : <b class="lien-or">contact@grouperigaudtech.fr</b>
+</p>
+<p class="fr note-bas" style="margin-top: 0; margin-bottom: 4px;">
+    🌐 <b>Domaines Souverains (<code>sss://</code>) :</b> Ouverture prochaine de l'enregistrement officiel des noms de domaine <code>.sss</code> (premiers domaines d'entreprise attribués gratuitement sur dossier) — Pré-réservation : <b class="lien-or">contact@grouperigaudtech.fr</b>
+</p>
 
-        <details class="aide-cle">
-            <summary>🔑 Comment gérer ma clé cryptographique (264 bits) ? ▾</summary>
-            <div class="contenu-cle">
-                - <b>Sécurité 264 bits & Unicité absolue :</b> Votre clé de 52 caractères utilise un alphabet de 34 signes (chiffres <code>1-9</code> et lettres <code>A-Z</code>, excluant le <code>0</code> et le <code>O</code> pour éviter toute erreur de lecture). Cela représente <b>34<sup>52</sup> combinaisons</b> (soit <b>4,33 × 10<sup>79</sup> clés uniques</b>), rendant tout doublon ou piratage mathématiquement impossible.<br><br>
-                - <b>Zéro base de données centrale & Emplacement sur votre PC :</b> Groupe RIGAUD Tech ne stocke aucune clé. Elle réside uniquement sur votre appareil dans votre dossier utilisateur : <code>C:\Users\VotreNom\.identite_sss.json</code>.<br><br>
-                - <b>Revente du PC ou changement de clé :</b> Si vous vendez ou cédez votre ordinateur, supprimez simplement le fichier <code>.identite_sss.json</code> pour effacer votre identité. Si vous souhaitez changer de clé à tout moment, supprimez ce fichier et relancez le navigateur : une nouvelle clé vierge sera générée.<br><br>
-                - <b>Utilisation sur plusieurs appareils (PC, téléphones) :</b> Chaque appareil génère sa propre clé par défaut. Pour utiliser la même identité sur tous vos appareils, copiez le fichier <code>.identite_sss.json</code> (ou remplacez la clé à l'intérieur avec le Bloc-notes) sur vos autres machines.
-            </div>
-        </details>
-    </div>
+    <details class="fr aide-cle">
+        <summary>🔑 Comment gérer ma clé cryptographique (264 bits) ? ▾</summary>
+        <div class="contenu-cle">
+            • <b>Sécurité 264 bits & Unicité absolue :</b> Votre clé de 52 caractères utilise un alphabet de 34 signes (chiffres <code>1-9</code> et lettres <code>A-Z</code>, excluant le <code>0</code> et le <code>O</code> pour éviter toute erreur de lecture). Cela représente <b>34<sup>52</sup> combinaisons</b> (soit <b>4.33 × 10<sup>79</sup> clés uniques</b>), rendant tout doublon ou piratage mathématiquement impossible.<br><br>
+            • <b>Zéro base de données centrale & Emplacement sur votre PC :</b> Groupe RIGAUD Tech ne stocke aucune clé. Elle réside uniquement sur votre appareil dans votre dossier utilisateur : <code>C:\Users\VotreNom\.identite_sss.json</code>.<br><br>
+            • <b>Revente du PC ou changement de clé :</b> Si vous vendez ou cédez votre ordinateur, supprimez simplement le fichier <code>.identite_sss.json</code> pour effacer votre identité. Si vous souhaitez changer de clé à tout moment, supprimez ce fichier et relancez le navigateur : une nouvelle clé vierge sera générée.<br><br>
+            • <b>Utilisation sur plusieurs appareils (PC, téléphones) :</b> Chaque appareil génère sa propre clé par défaut. Pour utiliser la même identité sur tous vos appareils, copiez le fichier <code>.identite_sss.json</code> (ou remplacez la clé à l'intérieur avec le Bloc-notes) sur vos autres machines.
+        </div>
+    </details>
 
     <!-- ================= VERSION ANGLAISE ================= -->
-    <div class="bloc-langue en">
-        <form action="sss://127.0.0.1/recherche" method="GET" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-            <div class="search-container">
-                <input type="text" name="q" class="search-box" placeholder="Search the static web...">
-            </div>
-            <div class="buttons">
-                <button type="submit" class="btn">Triple S Search</button>
-                <a href="sss://127.0.0.1/annuaire.html" class="btn" style="padding-top: 12px; box-sizing: border-box;">Verified Static Websites</a>
-            </div>
-        </form>
+    <form class="en" action="sss://127.0.0.1/recherche" method="GET" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="search-container">
+            <input type="text" name="q" class="search-box" placeholder="Search the static web...">
+        </div>
+        <div class="buttons">
+            <button type="submit" class="btn">Triple S Search</button>
+            <a href="sss://127.0.0.1/annuaire.html" class="btn" style="padding-top: 12px; box-sizing: border-box;">Triple S Domain Directory</a>
+        </div>
+    </form>
 
-        <p class="note-bas" style="margin-top: 40px; margin-bottom: 6px;">
-            🛡️ <b>SSS Shield Active:</b> Executable files and dynamic scripts are blocked. A blank screen or inactive button is normal on non-compliant websites.
-        </p>
-        <p class="note-bas" style="margin-top: 0; margin-bottom: 4px;">
-            🏢 <b>Businesses:</b> Any <code>www</code> website already built in static HTML displays natively on Triple S. To convert a dynamic site or protect your customer database: <b class="lien-or">contact@grouperigaudtech.fr</b>
-        </p>
-        <p class="note-bas" style="margin-top: 0; margin-bottom: 4px;">
-            🌐 <b>Sovereign Domains (<code>sss://</code>):</b> Official <code>.sss</code> domain name registration opening soon (first corporate domains granted free upon application) — Pre-registration: <b class="lien-or">contact@grouperigaudtech.fr</b>
-        </p>
+    <p class="en note-bas" style="margin-top: 40px; margin-bottom: 6px;">
+        🛡️ <b>SSS Shield Active:</b> Executable files and dynamic scripts are blocked. A blank screen or inactive button is normal on non-compliant websites.
+    </p>
+    <p class="en note-bas" style="margin-top: 0; margin-bottom: 4px;">
+    🏢 <b>Businesses:</b> Any <code>www</code> website already built in static HTML displays natively on Triple S. To convert a dynamic site or protect your customer database: <b class="lien-or">contact@grouperigaudtech.fr</b>
+</p>
+<p class="en note-bas" style="margin-top: 0; margin-bottom: 4px;">
+    🌐 <b>Sovereign Domains (<code>sss://</code>):</b> Official <code>.sss</code> domain name registration opening soon (first corporate domains granted free upon application) — Pre-registration: <b class="lien-or">contact@grouperigaudtech.fr</b>
+</p>
 
-        <details class="aide-cle">
-            <summary>🔑 How to manage my cryptographic key (264-bit)? ▾</summary>
-            <div class="contenu-cle">
-                - <b>264-bit Security & Absolute Uniqueness:</b> Your 52-character key uses a 34-character alphabet (digits <code>1-9</code> and letters <code>A-Z</code>, excluding <code>0</code> and <code>O</code> to prevent reading errors). This provides <b>34<sup>52</sup> combinations</b> (<b>4.33 × 10<sup>79</sup> unique keys</b>), making duplicates or brute-force attacks mathematically impossible.<br><br>
-                - <b>Zero Central Database & PC Location:</b> Groupe RIGAUD Tech never stores your key. It is stored strictly on your physical unit inside your user folder: <code>C:\Users\YourName\.identite_sss.json</code>.<br><br>
-                - <b>Selling your PC or Resetting your Key:</b> Before selling or giving away your computer, simply delete the <code>.identite_sss.json</code> file. To generate a brand-new key at any time, delete this file and restart the browser.<br><br>
-                - <b>Multiple Devices (PCs, Phones):</b> Each device generates its own key by default. To share the same identity across multiple devices, copy your <code>.identite_sss.json</code> file (or paste your 52-character key inside it) onto your other machines.
-            </div>
-        </details>
-    </div>
+    <details class="en aide-cle">
+        <summary>🔑 How to manage my cryptographic key (264-bit)? ▾</summary>
+        <div class="contenu-cle">
+            • <b>264-bit Security & Absolute Uniqueness:</b> Your 52-character key uses a 34-character alphabet (digits <code>1-9</code> and letters <code>A-Z</code>, excluding <code>0</code> and <code>O</code> to prevent reading errors). This provides <b>34<sup>52</sup> combinations</b> (<b>4.33 × 10<sup>79</sup> unique keys</b>), making duplicates or brute-force attacks mathematically impossible.<br><br>
+            • <b>Zero Central Database & PC Location:</b> Groupe RIGAUD Tech never stores your key. It is stored strictly on your physical unit inside your user folder: <code>C:\Users\YourName\.identite_sss.json</code>.<br><br>
+            • <b>Selling your PC or Resetting your Key:</b> Before selling or giving away your computer, simply delete the <code>.identite_sss.json</code> file. To generate a brand-new key at any time, delete this file and restart the browser.<br><br>
+            • <b>Multiple Devices (PCs, Phones):</b> Each device generates its own key by default. To share the same identity across multiple devices, copy your <code>.identite_sss.json</code> file (or paste your 52-character key inside it) onto your other machines.
+        </div>
+    </details>
 
 </body>
 </html>
