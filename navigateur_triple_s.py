@@ -43,6 +43,17 @@ class PageTripleS(QWebEnginePage):
             self.navigateur.barre_adresse.setText(url_str)
             self.navigateur.charger_reseau_sss(url_str)
             return False
+        # 4. Garde les liens relatifs des sites https_statique dans le protocole sss://
+        if _type == QWebEnginePage.NavigationType.NavigationTypeLinkClicked and url_str.startswith(("http://", "https://")):
+            for dom, infos in REGISTRE_SSS.items():
+                if infos.get("mode") == "https_statique":
+                    cible = infos.get("cible", "").rstrip("/")
+                    if cible and (url_str == cible or url_str.startswith(cible + "/")):
+                        reste = url_str[len(cible):] or "/index.html"
+                        nouvelle_url = f"sss://{dom}{reste}"
+                        self.navigateur.barre_adresse.setText(nouvelle_url)
+                        self.navigateur.charger_reseau_sss(nouvelle_url)
+                        return False
 
         return super().acceptNavigationRequest(url, _type, isMainFrame)
 class PageSecuriseeSSS(QWebEnginePage):
@@ -143,6 +154,20 @@ class NavigateurSSS(QMainWindow):
             url_moteur = f"https://lite.duckduckgo.com/lite/?q={recherche_formatee}"
             self.moteur.setUrl(QUrl(url_moteur))
 
+    def _injecter_base_href(self, html_brut, base_url):
+        if re.search(r"<base\b", html_brut, flags=re.IGNORECASE):
+            return html_brut
+        balise_base = f'<base href="{base_url}">'
+        if re.search(r"<head[^>]*>", html_brut, flags=re.IGNORECASE):
+            return re.sub(
+                r"<head[^>]*>",
+                lambda m: m.group(0) + "\n    " + balise_base,
+                html_brut,
+                count=1,
+                flags=re.IGNORECASE
+            )
+        return balise_base + "\n" + html_brut        
+
     def charger_reseau_sss(self, url):
         # Découpage de l'URL : sss://domaine/chemin
         sans_protocole = url.replace("sss://", "", 1)
@@ -173,9 +198,11 @@ class NavigateurSSS(QMainWindow):
                 cible = entree["cible"].rstrip("/")
                 url_distante = f"{cible}{chemin}"
                 try:
-                    req = urllib.request.Request(url_distante, headers={"User-Agent": "TripleS-Browser/1.1"})
+                    req = urllib.request.Request(url_distante, headers={"User-Agent": "TripleS-Browser/1.2"})
                     reponse = urllib.request.urlopen(req, timeout=5)
                     html_brut = reponse.read().decode('utf-8', errors='ignore')
+                    base_url = url_distante.rsplit("/", 1)[0] + "/"
+                    html_brut = self._injecter_base_href(html_brut, base_url)
                     self.moteur.setHtml(html_brut, QUrl(url))
                     return
                 except Exception as erreur:
@@ -283,13 +310,16 @@ def verifier_mise_a_jour():
     try:
         reponse = urllib.request.urlopen(URL_VERSION, timeout=3)
         version_serveur = reponse.read().decode('utf-8').strip()
-        if version_serveur != VERSION_ACTUELLE and len(version_serveur) < 15 and "<" not in version_serveur:
-            QMessageBox.information(
-                None,
-                "Mise à jour Triple S",
-                f"Une nouvelle version ({version_serveur}) est disponible.\nTéléchargez-la sur grouperigaudtech.fr."
-            )
-    except:
+        if len(version_serveur) < 15 and "<" not in version_serveur:
+            v_srv = tuple(int(x) for x in version_serveur.split(".") if x.isdigit())
+            v_loc = tuple(int(x) for x in VERSION_ACTUELLE.split(".") if x.isdigit())
+            if v_srv > v_loc:
+                QMessageBox.information(
+                    None,
+                    "Mise à jour Triple S",
+                    f"Une nouvelle version ({version_serveur}) est disponible.\nTéléchargez-la sur grouperigaudtech.fr."
+                )
+    except Exception:
         pass
 
 def initialiser_identite_crypto():
@@ -379,4 +409,3 @@ if __name__ == '__main__':
     fenetre = NavigateurSSS()
     fenetre.show()
     sys.exit(app.exec())
-
