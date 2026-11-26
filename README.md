@@ -1,8 +1,9 @@
 # 🛡️ Triple S Browser (`sss://`) — Sovereign Static Web & Post-Quantum Identity
 
-[![Version](https://img.shields.io/badge/Version-1.1.0-D4AF37?style=for-the-badge)](https://github.com/Groupe-RIGAUD-Tech/triple-s-browser/releases)
+[![Version](https://img.shields.io/badge/Version-2.0.0-D4AF37?style=for-the-badge)](https://github.com/Groupe-RIGAUD-Tech/triple-s-browser/releases)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20(64--bit)-202124?style=for-the-badge)](https://github.com/Groupe-RIGAUD-Tech/triple-s-browser/releases)
-[![Security](https://img.shields.io/badge/Architecture-Zero--JS%20%7C%20264--bit%20Entropy-D4AF37?style=for-the-badge)](#)
+[![Security](https://img.shields.io/badge/Security-Zero--JS%20%7C%20Ed25519%20%2B%20ML--DSA--65-D4AF37?style=for-the-badge)](#)
+[![License](https://img.shields.io/badge/License-Source--Available-1e293b?style=for-the-badge)](LICENSE)
 
 [🇫🇷 Version Française](#-version-française) | [🇬🇧 English Version](#-english-version)
 
@@ -11,46 +12,53 @@
 ## 🇫🇷 Version Française
 
 ### Qu'est-ce que le Navigateur Triple S ?
-**Triple S** est un navigateur souverain et un protocole réseau (`sss://`, port 1965) conçu pour réduire drastiquement la surface d'attaque sur le web B2B et protéger les données des entreprises contre l'exploitation automatisée.
+**Triple S** est un navigateur souverain et un protocole réseau natif (`sss://`, port TCP 1965) conçu pour les infrastructures critiques, les entreprises et l'ère post-quantique.
 
-Contrairement aux navigateurs classiques qui exécutent des milliers de lignes de code dynamique à chaque visite, Triple S applique une règle architecturale stricte : **aucun script (JavaScript), aucun plugin, aucun cookie et aucun fichier exécutable n'est transmis ni exécuté sur les domaines `sss://`**.
+Contrairement aux navigateurs classiques qui exécutent des milliers de lignes de code dynamique à chaque visite, Triple S applique une règle architecturale stricte : **zéro JavaScript, zéro plugin, zéro cookie et zéro exécutable sur les domaines `sss://`**.
 
-### Caractéristiques Clés (V1.1)
-- **Bouclier Statique Natif :** Bloque à la racine les vecteurs d'attaque XSS, le pistage publicitaire et le scraping automatisé par des agents IA autonomes.
-- **Registre Souverain & Annuaire Dynamique (`sss://annuaire.sss`) :** Résolution native des domaines `.sss` vérifiés par identifiant légal d'entreprise (SIRET, TVA UE, UID, D-U-N-S) et génération à la volée de l'annuaire sans une seule ligne de JavaScript.
-- **Identité Cryptographique Locale Post-Quantique (264 bits) :** Au premier lancement, le navigateur génère localement dans le profil utilisateur (`.identite_sss.json`) une clé aléatoire de **52 caractères** (alphabet sans ambiguïté de 34 signes excluant `0` et `O`), offrant $34^{52} \approx 4,33 \times 10^{79}$ combinaisons (soit 264 bits d'entropie CSPRNG, conservant > 128 bits de sécurité face à l'algorithme quantique de Grover).
-- **Architecture *Zero-Knowledge* (Zéro Base de Données Centrale) :** Aucune clé ni donnée personnelle n'est collectée ou stockée par l'éditeur. L'utilisateur conserve le contrôle matériel exclusif de son identité.
-- **Modèle d'Hébergement Hybride (3 Modes) :**
-  1. *Routage statique HTTPS (`https_statique`) :* Liaison d'un domaine `sss://` vers un sous-dossier `/sss/` de l'hébergement existant de l'entreprise (disponibilité 24h/24, zéro port à ouvrir).
-  2. *Auto-hébergement local (`noeud_sss`) :* Le PC ou serveur de l'entreprise diffuse directement ses pages statiques sur le port 1965 (zéro abonnement cloud).
-  3. *Réplication Pair-à-Pair / Nœuds statiques (Feuille de route V2) :* Distribution décentralisée de pages HTML signées entre pairs sans risque d'exécution virale.
+### Nouveautés & Caractéristiques Clés (V2.0.0)
+- **Authentification Post-Quantique Native (`sss-auth://`) :** Connexion sans mot de passe par double signature cryptographique **Ed25519 + ML-DSA-65 (standard NIST FIPS 204)**, couplée à un second facteur **2FA TOTP** et un nonce anti-rejeu.
+- **Coffre Chiffré Local (`.identite_sss.vault`) :** Clé maître 256 bits et coordonnées chiffrées localement (**Argon2id + AES-256-GCM**), dérivation de clés unique par domaine et verrouillage automatique en RAM après chaque action.
+- **4 Parcours B2B Souverains (Espace Client Démo) :** Inscription cryptographique, Connexion double facteur avec consentement granulaire, Contact entreprise zéro-spam et Validation d'achat signée (simulation `0.00 EUR`).
+- **Bouclier Statique & Registre Souverain (`sss://annuaire.sss`) :** Résolution native des domaines `.sss` vérifiés par identifiant légal (SIRET, TVA UE, UID, D-U-N-S) et interface 100 % bilingue **FR / EN**.
+- **Architecture *Zero-Knowledge* :** Zéro base de données centrale. Aucune clé privée ni donnée personnelle n'est collectée par l'éditeur.
+
+### Feuille de Route (Roadmap)
+- **v2.0 (Actuelle) :** Navigateur bilingue FR/EN, coffre chiffré local, double signature Ed25519 + ML-DSA-65, 2FA TOTP et 4 parcours B2B.
+- **v2.1 :** Signature cryptographique ML-DSA-65 du registre officiel `.sss` et déploiement de nœuds `noeud_sss` dédiés.
+- **v3.0 :** Décentralisation, réplication de nœuds statiques et ancrage cryptographique du registre `.sss`.
 
 ### Téléchargement & Installation
 Téléchargez les binaires vérifiés (Windows 64-bit et Linux x64, avec empreintes SHA-256) :  
 👉 **[Télécharger via l'onglet Releases](https://github.com/Groupe-RIGAUD-Tech/triple-s-browser/releases)** *(ou sur [grouperigaudtech.fr](https://www.grouperigaudtech.fr/telechargement.html))*.
 
 ### Offre de Lancement Entreprises
-Les **1 000 premiers noms de domaine `.sss` sont attribués gratuitement la première année** (1 domaine par entreprise vérifiée) afin de bâtir l'écosystème du web statique souverain.  
-📩 Contact & enregistrement : `contact@grouperigaudtech.fr`
+Les **1 000 premiers noms de domaine `.sss` sont attribués gratuitement la première année** (1 domaine par entreprise vérifiée).  
+📩 Contact & pré-réservation : `contact@grouperigaudtech.fr`
+
+### Licence & Propriété Intellectuelle
+Ce projet est distribué sous licence **Source-Available** (voir le fichier [`LICENSE`](LICENSE)) et protégé par un **dépôt e-Soleau auprès de l'INPI**. Le code est ouvert à l'audit de sécurité ; toute copie ou exploitation commerciale sans autorisation écrite est interdite.
 
 ---
 
 ## 🇬🇧 English Version
 
 ### What is Triple S Browser?
-**Triple S** is a sovereign web browser and network protocol (`sss://`, port 1965) engineered to drastically shrink the B2B attack surface and shield corporate assets from automated exploitation.
+**Triple S** is a sovereign browser and native network protocol (`sss://`, TCP port 1965) built for critical infrastructures, businesses, and the post-quantum era.
 
-Unlike conventional browsers that execute complex dynamic code on every page load, Triple S enforces a strict architectural rule: **zero JavaScript, zero plugins, zero cookies, and zero executables are transmitted or executed on `sss://` domains**.
+Unlike conventional browsers that execute complex dynamic code on every page load, Triple S enforces a strict architectural rule: **zero JavaScript, zero plugins, zero cookies, and zero executables on `sss://` domains**.
 
-### Core Features (V1.1)
-- **Native Static Shield:** Blocks XSS attack vectors, ad trackers, and automated scraping by autonomous AI agents at the protocol level.
-- **Sovereign Registry & Zero-JS Directory (`sss://annuaire.sss`):** Native resolution of `.sss` domains verified by legal corporate ID (SIRET, EU VAT, UID, D-U-N-S) with an on-the-fly directory generated without JavaScript.
-- **Local Post-Quantum Cryptographic Identity (264-bit):** On first launch, the client generates a **52-character** local cryptographic key (`.identite_sss.json`) using an unambiguous 34-character alphabet (excluding `0` and `O`), yielding $34^{52} \approx 4.33 \times 10^{79}$ combinations (264 bits of CSPRNG entropy, maintaining > 128-bit effective security against Grover's quantum algorithm).
-- **Zero-Knowledge Architecture:** Zero central database. Groupe RIGAUD Tech never collects or stores user keys or personal data.
-- **Hybrid Hosting Architecture (3 Modes):**
-  1. *Static HTTPS Routing (`https_statique`):* Maps an official `sss://` domain to an existing `/sss/` static directory on the company's current web host (24/7 availability, zero open ports).
-  2. *Local On-Premise Self-Hosting (`noeud_sss`):* The company's own PC or local server serves static HTML pages directly on port 1965 (zero recurring cloud fees).
-  3. *Peer-to-Peer / Static Node Replication (V2 Roadmap):* Decentralized distribution of signed static HTML pages across network nodes without malware execution risks.
+### Core Features (V2.0.0)
+- **Native Post-Quantum Authentication (`sss-auth://`):** Passwordless authentication powered by hybrid **Ed25519 + ML-DSA-65 (NIST FIPS 204)** dual signatures, **TOTP 2FA**, and one-time anti-replay nonces.
+- **Local Encrypted Vault (`.identite_sss.vault`):** 256-bit master key and user profile encrypted locally (**Argon2id + AES-256-GCM**), per-domain key derivation, and automatic RAM locking after every action.
+- **4 Sovereign B2B Workflows (Client Portal Demo):** Cryptographic registration, 2FA login with granular consent, zero-spam company contact, and signed purchase validation (`0.00 EUR` simulation).
+- **Static Shield & Sovereign Registry (`sss://annuaire.sss`):** Native resolution of `.sss` domains verified by legal corporate ID (SIRET, EU VAT, UID, D-U-N-S) with a unified **FR / EN** interface.
+- **Zero-Knowledge Architecture:** Zero central database. Groupe RIGAUD Tech never collects or stores private keys or personal data.
+
+### Roadmap
+- **v2.0 (Current):** Bilingual FR/EN browser, local encrypted vault, Ed25519 + ML-DSA-65 dual signatures, TOTP 2FA, and 4 B2B flows.
+- **v2.1:** ML-DSA-65 cryptographic signing of the official `.sss` registry and dedicated `noeud_sss` server deployments.
+- **v3.0:** Decentralization, static node replication, and cryptographic anchoring of the `.sss` registry.
 
 ### Download & Installation
 Download the verifiable binaries (Windows 64-bit & Linux x64, with SHA-256 checksums):  
@@ -59,6 +67,9 @@ Download the verifiable binaries (Windows 64-bit & Linux x64, with SHA-256 check
 ### Early-Adopter Business Offer
 The **first 1,000 `.sss` domain names are granted free of charge for the first year** (limit 1 domain per verified company).  
 📩 Registration & inquiries: `contact@grouperigaudtech.fr`
+
+### License & Intellectual Property
+This project is distributed under a **Source-Available** license (see [`LICENSE`](LICENSE)) and protected by an **INPI e-Soleau filing**. Source code is open for security auditing; commercial use or redistribution without prior written permission is prohibited.
 
 ---
 
