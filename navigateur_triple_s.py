@@ -15,10 +15,11 @@ from PyQt6.QtGui import QDesktopServices
 import urllib.request
 import threading
 import moteur_sss
+import sss_ui_auth
 import secrets
 import json
 
-VERSION_ACTUELLE = "1.2.0"
+VERSION_ACTUELLE = "2.0.0"
 URL_VERSION = "https://grouperigaudtech.fr/fichiers/version.txt"
 URL_REGISTRE = "https://grouperigaudtech.fr/fichiers/registre.json"
 
@@ -61,9 +62,11 @@ TRADUCTIONS = {
             "Bienvenue sur le réseau souverain Triple S.\n\n"
             "Voici votre clé d'identification unique (52 caractères — 264 bits) :\n\n"
             "{cle}\n\n"
-            "Aucune copie n'est stockée sur un serveur central. Cliquez ci-dessous pour la copier."
+            "Aucune copie n'est stockée sur un serveur central. Cliquez ci-dessous pour la copier.",
         ),
         "cle_btn": "📋 Copier la clé et fermer",
+        "maj_btn_dl": "⬇️ Télécharger maintenant",
+        "maj_btn_plus_tard": "Plus tard",
     },
     "en": {
         "titre_fenetre": "Triple S - Secure Browser",
@@ -99,6 +102,8 @@ TRADUCTIONS = {
             "No copy is stored on any central server. Click below to copy it."
         ),
         "cle_btn": "📋 Copy key and close",
+        "maj_btn_dl": "⬇️ Download now",
+        "maj_btn_plus_tard": "Later",
     }
 }
 
@@ -124,6 +129,14 @@ class PageTripleS(QWebEnginePage):
             QDesktopServices.openUrl(url)
             return False
 
+        # 2 bis. Interception native de l'authentification sss-auth:// (bloquee si la page vient de HTTP/HTTPS)
+        if url.scheme() == "sss-auth":
+            if not isMainFrame or self.url().scheme() in ("http", "https"):
+                QMessageBox.critical(self.navigateur, "Securite Triple S", "Authentification refusee depuis le web HTTP/HTTPS.")
+                return False
+            QTimer.singleShot(0, lambda u=url_str: self.navigateur.executer_auth_sss(u))
+            return False
+
         # 3. Interception de la barre de recherche centrale
         if "/recherche?q=" in url_str:
             mot_cle = url_str.split("?q=")[1].replace("+", " ")
@@ -138,6 +151,7 @@ class PageTripleS(QWebEnginePage):
                 url_str = f"sss://127.0.0.1/{nom_fichier}"
             self.navigateur.barre_adresse.setText(url_str)
             self.navigateur.charger_reseau_sss(url_str)
+            
             return False
 
         # 5. Garde les liens relatifs des sites https_statique dans le protocole sss://
@@ -184,11 +198,21 @@ class NavigateurSSS(QMainWindow):
         self.bouton_langue.setStyleSheet("background-color: #303134; color: #D4AF37; padding: 10px 12px; border-radius: 4px; font-weight: bold;")
         self.bouton_langue.clicked.connect(self.action_basculer_langue)
 
+        self.auth_sss = sss_ui_auth.GestionnaireAuthSSS()
+        self.origine_courante_sss = None
+        self.cible_tcp_courante = None
+
+        self.bouton_coffre = QPushButton("🔑")
+        self.bouton_coffre.setToolTip("Coffre chiffre Triple S")
+        self.bouton_coffre.setStyleSheet("background-color: #303134; color: #D4AF37; padding: 10px 12px; border-radius: 4px; font-weight: bold;")
+        self.bouton_coffre.clicked.connect(lambda: self.auth_sss.ouvrir_profil(self))
+
         layout_navigation.addWidget(self.bouton_retour)
         layout_navigation.addWidget(self.bouton_accueil)
         layout_navigation.addWidget(self.barre_adresse)
         layout_navigation.addWidget(self.bouton_sync)
         layout_navigation.addWidget(self.bouton_langue)
+        layout_navigation.addWidget(self.bouton_coffre)
 
         self.bandeau_confiance = QLabel()
         self.bandeau_confiance.setFixedHeight(32)
@@ -224,6 +248,8 @@ class NavigateurSSS(QMainWindow):
         return texte.format(**kwargs) if kwargs else texte
 
     def appliquer_langue(self, recharger_page=True):
+        moteur_sss.LANGUE_ACTIVE = self.langue
+        sss_ui_auth.LANGUE_ACTIVE = self.langue
         self.setWindowTitle(self.t("titre_fenetre"))
         self.bouton_retour.setText(self.t("btn_retour"))
         self.bouton_accueil.setText(self.t("btn_accueil"))
@@ -234,12 +260,12 @@ class NavigateurSSS(QMainWindow):
 
         url_courante = self.barre_adresse.text().strip()
         if url_courante:
-            self.mettre_a_jour_bandeau(url_courante)
-            if recharger_page and url_courante.startswith("sss://"):
-                sans_proto = url_courante.replace("sss://", "", 1)
-                domaine = sans_proto.split("/", 1)[0].lower()
-                if domaine == "annuaire.sss" or domaine not in REGISTRE_SSS and domaine != "127.0.0.1":
-                    self.charger_reseau_sss(url_courante)
+          self.mettre_a_jour_bandeau(url_courante)
+          if recharger_page and url_courante.startswith("sss://"):
+              sans_proto = url_courante.replace("sss://", "", 1)
+              domaine = sans_proto.split("/", 1)[0].lower()
+              if domaine in ("annuaire.sss", "127.0.0.1") or domaine not in REGISTRE_SSS:
+                  self.charger_reseau_sss(url_courante)         
 
     def action_basculer_langue(self):
         self.langue = "en" if self.langue == "fr" else "fr"
@@ -261,9 +287,10 @@ class NavigateurSSS(QMainWindow):
             domaine = sans_proto.split("/", 1)[0].lower()
             chemin = "/" + sans_proto.split("/", 1)[1] if "/" in sans_proto else "/index.html"
 
+           
             if domaine == "annuaire.sss" or chemin == "/annuaire.html":
-                self.bandeau_confiance.setText(self.t("bandeau_annuaire"))
-                self.bandeau_confiance.setStyleSheet(
+                   self.bandeau_confiance.setText(self.t("bandeau_annuaire"))
+                   self.bandeau_confiance.setStyleSheet(
                     f"background-color: #141a24; color: #D4AF37; border-bottom: 1px solid #26334d; {style_base}"
                 )
             elif domaine in REGISTRE_SSS:
@@ -286,6 +313,8 @@ class NavigateurSSS(QMainWindow):
                     f"background-color: #261a0d; color: #f59e0b; border-bottom: 1px solid #f59e0b; {style_base}"
                 )
         else:
+            self.origine_courante_sss = None
+            self.cible_tcp_courante = None
             self.bandeau_confiance.setText(self.t("bandeau_web"))
             self.bandeau_confiance.setStyleSheet(
                 f"background-color: #202124; color: #9aa0a6; border-bottom: 1px solid #3c4043; {style_base}"
@@ -316,6 +345,17 @@ class NavigateurSSS(QMainWindow):
     def action_accueil(self):
         self.barre_adresse.setText("sss://127.0.0.1/index.html")
         self.charger_url()
+
+    def executer_auth_sss(self, url_str):
+        html_resultat = self.auth_sss.traiter_lien_auth(
+            self,
+            url_str,
+            self.origine_courante_sss,
+            self.cible_tcp_courante,
+        )
+        if html_resultat:
+            url_actuelle = self.barre_adresse.text().strip()
+            self.moteur.setHtml(html_resultat, QUrl(url_actuelle))
 
     def charger_url(self):
         saisie = self.barre_adresse.text().strip()
@@ -362,6 +402,9 @@ class NavigateurSSS(QMainWindow):
             chemin = "/index.html"
 
         domaine = domaine.lower()
+
+        self.origine_courante_sss = f"sss://{domaine}"
+        self.cible_tcp_courante = None
 
         # Annuaire dynamique généré directement depuis registre.json (Zéro-JS)
         if chemin == "/annuaire.html" or domaine == "annuaire.sss":
@@ -417,6 +460,7 @@ class NavigateurSSS(QMainWindow):
 
     def _requete_tcp_sss(self, ip, port, chemin, url_originale):
         try:
+            self.cible_tcp_courante = (ip, port)
             connexion = socket.create_connection((ip, port), timeout=5)
             requete = f"sss://{ip}{chemin}\r\n"
             connexion.sendall(requete.encode('utf-8'))
@@ -495,11 +539,15 @@ def verifier_mise_a_jour(langue="fr"):
             v_srv = tuple(int(x) for x in version_serveur.split(".") if x.isdigit())
             v_loc = tuple(int(x) for x in VERSION_ACTUELLE.split(".") if x.isdigit())
             if v_srv > v_loc:
-                QMessageBox.information(
-                    None,
-                    TRADUCTIONS[langue]["maj_titre"],
-                    TRADUCTIONS[langue]["maj_texte"].format(version=version_serveur)
-                )
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle(TRADUCTIONS[langue]["maj_titre"])
+                msg.setText(TRADUCTIONS[langue]["maj_texte"].format(version=version_serveur))
+                btn_dl = msg.addButton(TRADUCTIONS[langue]["maj_btn_dl"], QMessageBox.ButtonRole.AcceptRole)
+                msg.addButton(TRADUCTIONS[langue]["maj_btn_plus_tard"], QMessageBox.ButtonRole.RejectRole)
+                msg.exec()
+                if msg.clickedButton() == btn_dl:
+                    QDesktopServices.openUrl(QUrl("https://www.grouperigaudtech.fr/#triple-s"))
     except Exception:
         pass
 
