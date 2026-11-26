@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demander un domaine .sss — Triple S</title>
+    <style>
+        body { background: #0b101b; color: #e2e8f0; font-family: Segoe UI, system-ui, sans-serif; max-width: 820px; margin: auto; padding: 36px 20px; line-height: 1.6; }
+        .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .top a { color: #94a3b8; text-decoration: none; font-size: 13px; }
+        .lang a { border: 1px solid #334155; padding: 4px 10px; border-radius: 4px; margin-left: 6px; }
+        .lang .actif { border-color: #D4AF37; color: #D4AF37; font-weight: 700; }
+        h1 { color: #D4AF37; margin-bottom: 8px; }
+        h2 { color: #f8fafc; margin-top: 0; font-size: 19px; }
+        .carte { background: #111827; border: 1px solid #1e293b; border-radius: 8px; padding: 22px; margin: 18px 0; }
+        .alerte { background: #1c1917; border: 1px solid #f59e0b; border-radius: 8px; padding: 18px; margin: 18px 0; }
+        .btn { display: inline-block; background: #D4AF37; color: #05080f; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: 700; margin-top: 10px; }
+        code { background: #1e293b; padding: 2px 6px; border-radius: 4px; color: #38bdf8; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+        th, td { border: 1px solid #1e293b; padding: 10px; text-align: left; vertical-align: top; }
+        th { background: #1e293b; color: #D4AF37; }
+        ul { padding-left: 20px; margin-bottom: 0; }
+        li { margin-bottom: 8px; }
+        .exemple { border-left: 3px solid #D4AF37; padding-left: 14px; color: #cbd5e1; }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <a href="sss://127.0.0.1/index.html">⬅ Retour à l'accueil</a>
+        
+    </div>
+
+    <h1>🌐 Demander un domaine souverain .sss</h1>
+    <p>Les premiers domaines d'entreprise sont attribués gratuitement sur dossier vérifié. Dans cette phase v2.0, l'architecture limite volontairement les expositions avant d'ouvrir progressivement de nouveaux usages.</p>
+
+    <div class="carte">
+        <h2>1. Choisir votre mode de déploiement</h2>
+        <table>
+            <tr>
+                <th>Critère</th>
+                <th>Mode <code>https_statique</code></th>
+                <th>Mode <code>noeud_sss</code> (Port 1965)</th>
+            </tr>
+            <tr>
+                <td><b>Principe</b></td>
+                <td>Vous conservez votre hébergement web HTTPS actuel (URL cible). Triple S affiche vos pages statiques en filtrant tout script.</td>
+                <td>Vous hébergez un serveur Triple S dédié (IP + port TCP 1965) communiquant nativement en protocole <code>sss://</code>.</td>
+            </tr>
+            <tr>
+                <td><b>Usage idéal</b></td>
+                <td>Site vitrine, présentation d'entreprise, catalogue, documentation (lecture seule).</td>
+                <td>Espace client, prise de contact signée, validation d'actions ou de commandes.</td>
+            </tr>
+            <tr>
+                <td><b>Authentification <code>sss-auth://</code></b></td>
+                <td>Non disponible.</td>
+                <td>Active (double signature post-quantique + 2FA, sans mot de passe).</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="carte">
+        <h2>2. Avantages du réseau Triple S</h2>
+        <ul>
+            <li><b>Zéro mot de passe :</b> l'utilisateur s'identifie avec son coffre chiffré local (clé unique générée par domaine) et un code 2FA temporaire. Aucun secret n'est stocké sur votre serveur.</li>
+            <li><b>Élimination du phishing :</b> les clés cryptographiques sont liées au domaine vérifié par le navigateur ; un faux site ne peut pas les utiliser.</li>
+            <li><b>Bouclier Zéro-JS :</b> l'exécution de scripts et d'<code>&lt;iframe&gt;</code> est bloquée nativement, supprimant la majorité des attaques web classiques.</li>
+            <li><b>Protection contre les agents IA malveillants :</b> sans script ni session persistante, aucun agent automatisé ne peut agir à l'insu de l'humain. Chaque action exige une validation manuelle.</li>
+            <li><b>Prêt pour le post-quantique :</b> l'authentification combine déjà Ed25519 et ML-DSA-65 (standard NIST) pour résister aux futurs ordinateurs quantiques.</li>
+            <li><b>Évolution continue :</b> l'objectif est de renforcer régulièrement la sécurité et la souveraineté du protocole sans jamais sacrifier sa simplicité.</li>
+        </ul>
+    </div>
+
+    <div class="carte">
+        <h2>3. Limites et compromis à connaître</h2>
+        <p>Choisir un domaine <code>.sss</code> implique des contraintes techniques volontaires. Elles peuvent être perçues comme des inconvénients pour certaines stratégies marketing, mais constituent un avantage direct pour la sécurité et la confiance des visiteurs :</p>
+        <ul>
+            <li><b>Pas de publicité marketing :</b> aucune régie publicitaire ni bannière tierce ne fonctionne sur Triple S.</li>
+            <li><b>Pas de suivi client ni de statistiques :</b> aucun cookie, pixel ou outil d'analyse comportementale (type Google Analytics).</li>
+            <li><b>Moins d'automatisations dynamiques :</b> les formulaires complexes, chats en direct ou animations JavaScript sont désactivés. Cela convient parfaitement aux sites clairs et directs, mais demande d'adapter les sites très dynamiques.</li>
+        </ul>
+        <p style="margin-top:14px; margin-bottom:0; color:#94a3b8;"><i>Nous travaillons activement sur de nouvelles solutions natives et souveraines pour remplacer progressivement ces fonctionnalités actuelles sans jamais compromettre la sécurité.</i></p>
+    </div>
+
+    <div class="alerte">
+        <h2>🛡️ Charte de contenu obligatoire (Tout public)</h2>
+        <p style="margin-bottom:0;">Tous les contenus publiés sur un domaine <code>.sss</code> doivent pouvoir être lus et vus par un enfant. <b>Les photos et vidéos réservées aux plus de 18 ans, la pornographie et la violence directe sont strictement interdites.</b> Tout manquement entraîne le retrait immédiat du domaine de l'annuaire.</p>
+    </div>
+
+    <div class="carte">
+        <h2>4. Informations à envoyer pour votre demande</h2>
+        <ul>
+            <li><b>Raison sociale :</b> nom officiel de l'entreprise ou organisation.</li>
+            <li><b>Identifiant légal :</b> SIRET, SIREN, N° TVA ou registre équivalent.</li>
+            <li><b>Domaine souhaité :</b> exemple <code>sss://monentreprise.sss</code>.</li>
+            <li><b>Mode choisi :</b> <code>https_statique</code> (URL HTTPS) ou <code>noeud_sss</code> (IP + port 1965).</li>
+            <li><b>Conformité :</b> engagement à respecter le bouclier Zéro-JS et la charte tout public.</li>
+        </ul>
+        <p style="margin-top:14px;"><b>Modèle à compléter, copier (Ctrl+A puis Ctrl+C) et envoyer à <code>contact@grouperigaudtech.fr</code> :</b></p>
+        <textarea rows="12" style="width:100%; box-sizing:border-box; background:#0b101b; color:#e2e8f0; border:1px solid #334155; border-radius:6px; padding:12px; font-family:Consolas, monospace; font-size:13px;">Objet : Demande de domaine .sss
+
+Raison sociale : 
+Identifiant légal (SIRET / SIREN / TVA) : 
+Pays : 
+Référent (Nom, Prénom) : 
+Domaine souhaité : sss://
+Mode choisi (https_statique ou noeud_sss) : (optionnel — peut être décidé plus tard) 
+URL cible HTTPS ou IP (port 1965) : (optionnel — à voir avec votre équipe technique)
+
+Je certifie que le site respecte le bouclier Zéro-JS et la charte tout public Triple S.</textarea>
+            </div>
+
+    <div class="carte">
+        <h2>5. Exemple concret en mode statique</h2>
+        <div class="exemple">
+            <p style="margin:0;"><b>Groupe RIGAUD Tech</b> — Site vitrine statique compatible Triple S (HTML5/CSS3 pur, zéro script, zéro cookie) :<br>
+            <a href="sss://grt.sss" style="text-decoration:none;"><code>sss://grt.sss</code></a></p>
+        </div>
+    </div>
+</body>
+</html>

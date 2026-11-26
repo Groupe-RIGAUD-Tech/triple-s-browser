@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a .sss Domain — Triple S</title>
+    <style>
+        body { background: #0b101b; color: #e2e8f0; font-family: Segoe UI, system-ui, sans-serif; max-width: 820px; margin: auto; padding: 36px 20px; line-height: 1.6; }
+        .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .top a { color: #94a3b8; text-decoration: none; font-size: 13px; }
+        .lang a { border: 1px solid #334155; padding: 4px 10px; border-radius: 4px; margin-left: 6px; }
+        .lang .actif { border-color: #D4AF37; color: #D4AF37; font-weight: 700; }
+        h1 { color: #D4AF37; margin-bottom: 8px; }
+        h2 { color: #f8fafc; margin-top: 0; font-size: 19px; }
+        .carte { background: #111827; border: 1px solid #1e293b; border-radius: 8px; padding: 22px; margin: 18px 0; }
+        .alerte { background: #1c1917; border: 1px solid #f59e0b; border-radius: 8px; padding: 18px; margin: 18px 0; }
+        .btn { display: inline-block; background: #D4AF37; color: #05080f; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: 700; margin-top: 10px; }
+        code { background: #1e293b; padding: 2px 6px; border-radius: 4px; color: #38bdf8; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+        th, td { border: 1px solid #1e293b; padding: 10px; text-align: left; vertical-align: top; }
+        th { background: #1e293b; color: #D4AF37; }
+        ul { padding-left: 20px; margin-bottom: 0; }
+        li { margin-bottom: 8px; }
+        .exemple { border-left: 3px solid #D4AF37; padding-left: 14px; color: #cbd5e1; }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <a href="sss://127.0.0.1/index.html">⬅ Back to Home</a>
+    
+    </div>
+
+    <h1>🌐 Request a Sovereign .sss Domain</h1>
+    <p>Early business domains are granted free of charge upon legal verification. In this v2.0 phase, the architecture intentionally minimizes exposure before gradually expanding to new capabilities.</p>
+
+    <div class="carte">
+        <h2>1. Choose Your Deployment Mode</h2>
+        <table>
+            <tr>
+                <th>Criteria</th>
+                <th><code>https_statique</code> Mode</th>
+                <th><code>noeud_sss</code> Mode (Port 1965)</th>
+            </tr>
+            <tr>
+                <td><b>How it works</b></td>
+                <td>Keep your existing HTTPS web hosting (target URL). Triple S renders your static pages while blocking all scripts.</td>
+                <td>Host a dedicated Triple S server (IP + TCP port 1965) speaking the native <code>sss://</code> protocol.</td>
+            </tr>
+            <tr>
+                <td><b>Best for</b></td>
+                <td>Company showcase, catalog, documentation (read-only).</td>
+                <td>Client portals, cryptographically signed contact, action or order validation.</td>
+            </tr>
+            <tr>
+                <td><b><code>sss-auth://</code> Auth</b></td>
+                <td>Not available.</td>
+                <td>Enabled (passwordless post-quantum dual signature + 2FA).</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="carte">
+        <h2>2. Advantages of the Triple S Network</h2>
+        <ul>
+            <li><b>No more passwords:</b> users authenticate with their local encrypted vault (unique key per domain) and a temporary 2FA code. No secret is ever stored on your server.</li>
+            <li><b>Eliminates phishing:</b> cryptographic keys are bound to the verified domain by the browser; a fake site cannot reuse them.</li>
+            <li><b>Zero-JS Shield:</b> scripts and <code>&lt;iframe&gt;</code> tags are blocked natively, neutralizing most common web attacks.</li>
+            <li><b>Protection against rogue AI agents:</b> with no scripts or persistent sessions, no automated agent can act behind the user's back. Every action requires explicit human approval.</li>
+            <li><b>Built for the post-quantum era:</b> authentication already combines Ed25519 and ML-DSA-65 (NIST standard) to resist future quantum computers.</li>
+            <li><b>Future-ready security:</b> our goal is to continuously strengthen protocol security and sovereignty without sacrificing simplicity.</li>
+        </ul>
+    </div>
+
+    <div class="carte">
+        <h2>3. Trade-offs &amp; Limitations</h2>
+        <p>Using a <code>.sss</code> domain involves deliberate technical constraints. While they may limit certain marketing practices, they provide a direct safety and trust advantage for visitors:</p>
+        <ul>
+            <li><b>No marketing ads:</b> third-party ad networks and banners do not run on Triple S.</li>
+            <li><b>No client tracking or analytics:</b> no cookies, tracking pixels, or behavioral statistics tools.</li>
+            <li><b>Fewer dynamic automations:</b> complex forms, live chats, and JavaScript animations are disabled. Ideal for clean, direct websites, though heavily dynamic sites require adaptation.</li>
+        </ul>
+        <p style="margin-top:14px; margin-bottom:0; color:#94a3b8;"><i>We are actively working on native, sovereign solutions to gradually replace these current web features without ever compromising security.</i></p>
+    </div>
+
+    <div class="alerte">
+        <h2>🛡️ Mandatory Content Policy (Child-Safe)</h2>
+        <p style="margin-bottom:0;">All content published on a <code>.sss</code> domain must be safe to read and view by a child. <b>18+ photos or videos, pornography, and explicit violence are strictly forbidden.</b> Any violation results in immediate removal from the directory.</p>
+    </div>
+
+    <div class="carte">
+        <h2>4. Required Information</h2>
+        <ul>
+            <li><b>Legal Entity Name:</b> official company or organization name.</li>
+            <li><b>Legal ID:</b> company registration number, VAT ID, or equivalent.</li>
+            <li><b>Requested Domain:</b> e.g. <code>sss://mycompany.sss</code>.</li>
+            <li><b>Deployment Mode:</b> <code>https_statique</code> (HTTPS URL) or <code>noeud_sss</code> (IP + port 1965).</li>
+            <li><b>Compliance:</b> commitment to the Zero-JS shield and the child-safe content policy.</li>
+        </ul>
+<p style="margin-top:14px;"><b>Template to fill in, copy (Ctrl+A then Ctrl+C) and send to <code>contact@grouperigaudtech.fr</code>:</b></p>
+        <textarea rows="12" style="width:100%; box-sizing:border-box; background:#0b101b; color:#e2e8f0; border:1px solid #334155; border-radius:6px; padding:12px; font-family:Consolas, monospace; font-size:13px;">Subject: .sss Domain Request
+
+Legal Entity Name: 
+Legal ID (Registration / VAT): 
+Country: 
+Contact Person (Full Name): 
+Requested Domain: sss://
+Deployment Mode (https_statique or noeud_sss): (optional — can be decided later)
+Target HTTPS URL or IP (port 1965): (optional — to be confirmed with your IT team)
+
+I confirm this site complies with the Triple S Zero-JS shield and child-safe content policy.</textarea>
+            </div>
+
+    <div class="carte">
+        <h2>5. Live Static Mode Example</h2>
+        <div class="exemple">
+            <p style="margin:0;"><b>Groupe RIGAUD Tech</b> — Static showcase website compatible with Triple S (pure HTML5/CSS3, zero scripts, zero cookies):<br>
+            <a href="sss://grt.sss" style="text-decoration:none;"><code>sss://grt.sss</code></a></p>
+        </div>
+    </div>
+</body>
+</html>

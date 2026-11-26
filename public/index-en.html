@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Triple S</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #202124; color: #e8eaed; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .logo-or { font-size: 72px; margin-bottom: 20px; font-weight: 800; letter-spacing: 3px; background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .search-container { width: 100%; max-width: 584px; }
+        .search-box { width: 100%; padding: 14px 22px; border-radius: 24px; border: 1px solid #5f6368; background-color: #202124; color: #fff; font-size: 16px; outline: none; box-sizing: border-box; }
+        .search-box:focus { background-color: #303134; box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: transparent; }
+        .buttons { margin-top: 28px; display: flex; gap: 12px; justify-content: center; }
+        .btn { background-color: #303134; border: 1px solid transparent; color: #e8eaed; padding: 10px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; text-decoration: none; }
+        .btn:hover { border: 1px solid #5f6368; }
+        .note-bas { color: #6c757d; font-size: 12px; text-align: center; }
+        .lien-or { color: #D4AF37; text-decoration: none; }
+        details.aide-cle { margin-top: 8px; max-width: 680px; text-align: center; font-size: 12px; color: #6c757d; }
+        details.aide-cle summary { cursor: pointer; color: #9aa0a6; list-style: none; outline: none; }
+        details.aide-cle summary:hover { color: #D4AF37; }
+        .contenu-cle { margin-top: 12px; padding: 16px 20px; background-color: #16171a; border: 1px solid #3c4043; border-left: 3px solid #D4AF37; border-radius: 6px; text-align: left; color: #bdc1c6; line-height: 1.6; font-size: 12px; }
+        .contenu-cle b { color: #e8eaed; }
+        .contenu-cle code { background: #202124; color: #D4AF37; padding: 2px 5px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <div style="position: absolute; top: 20px; right: 24px; width: 200px; display: flex; flex-direction: column; gap: 8px;">
+        <a href="sss://127.0.0.1/espace-client.html"
+           style="display: block; box-sizing: border-box; width: 100%; text-align: center; background: #D4AF37; color: #05080f; padding: 9px 12px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 13px;">
+            🔐 Client Portal
+        </a>
+        <a href="sss://127.0.0.1/demande-domaine.html"
+           style="display: block; box-sizing: border-box; width: 100%; text-align: center; background: #1e293b; color: #D4AF37; border: 1px solid #D4AF37; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 13px;">
+            🌐 Request a .sss
+        </a>
+    </div>
+
+    <h1 class="logo-or">SSS</h1>
+
+    <form action="sss://127.0.0.1/recherche" method="GET" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="search-container">
+            <input type="text" name="q" class="search-box" placeholder="Search the static web...">
+        </div>
+        <div class="buttons">
+            <button type="submit" class="btn">Triple S Search</button>
+            <a href="sss://127.0.0.1/annuaire.html" class="btn" style="padding-top: 12px; box-sizing: border-box;">Triple S Domain Directory</a>
+        </div>
+    </form>
+
+    <p class="note-bas" style="margin-top: 100px; margin-bottom: 6px;">
+        🛡️ <b>SSS Shield Active:</b> Executable files and dynamic scripts are blocked. A blank screen or inactive button is normal on non-compliant websites.
+    </p>
+    <p class="note-bas" style="margin-top: 0; margin-bottom: 4px;">
+        🏢 <b>Businesses:</b> Any <code>www</code> website already built in static HTML displays natively on Triple S. To convert a dynamic site or protect your customer database: <b class="lien-or">contact@grouperigaudtech.fr</b>
+    </p>
+    <p class="note-bas" style="margin-top: 0; margin-bottom: 4px;">
+        🌐 <b>Sovereign Domains (<code>sss://</code>):</b> Official <code>.sss</code> domain name registration opening soon (first corporate domains granted free upon application) — Pre-registration: <b class="lien-or">contact@grouperigaudtech.fr</b>
+    </p>
+
+    <details class="aide-cle">
+        <summary>🔑 How does my cryptographic vault (v2.0) work? ▾</summary>
+        <div class="contenu-cle">
+            • <b>Post-quantum security (Ed25519 + ML-DSA-65):</b> Your vault derives a unique key pair per domain and locks itself automatically after every action.<br><br>
+            • <b>Zero central database:</b> Groupe RIGAUD Tech never stores your keys. Your encrypted vault stays strictly on your PC: <code>C:\Users\YourName\.identite_sss.vault</code>.<br><br>
+            • <b>Selling your PC or lost passphrase:</b> Simply delete <code>.identite_sss.vault</code> to erase your identity or start fresh with a new vault.<br><br>
+            • <b>Profile management:</b> Click the <code>🔑</code> icon in the top bar to view or update your local details.
+        </div>
+    </details>
+
+</body>
+</html>
