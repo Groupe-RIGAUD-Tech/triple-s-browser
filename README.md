@@ -1,6 +1,3 @@
-Voici ton `README.md` mis à jour pour la **v2.1.0** (FR + EN), aligné avec ta Roadmap et ta Release GitHub :
-
-```markdown
 # 🛡️ Triple S Browser (`sss://`) — Sovereign Static Web & Post-Quantum Identity
 
 [![Version](https://img.shields.io/badge/Version-2.1.0-D4AF37?style=for-the-badge)](https://github.com/Groupe-RIGAUD-Tech/triple-s-browser/releases)
