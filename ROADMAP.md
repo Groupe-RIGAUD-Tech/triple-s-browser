@@ -64,10 +64,11 @@ Triple S is an operational, cross-platform B2B browser and protocol for **Window
 - [ ] **2FA UX & Wayland Polish:** Highlighted 2FA input field in the consent dialog and smoother native Wayland fallback on Linux.
 - [ ] **Native Packaging:** `.AppImage` / `.deb` packages for Linux and EV code-signing for Windows.
 
-### 🛡️ v3.0.0 — Post-Quantum Hardware & Decentralized Anchoring
+### 🛡️ v3.0.0 — Post-Quantum Transport, Hardware & Decentralized Anchoring
+- [ ] **Post-Quantum Transport Layer (Anti-HNDL):** Integrate **ML-KEM-768** key encapsulation directly into the `sss://` transport layer (port 1965) to protect recorded traffic against *Harvest Now, Decrypt Later* attacks, with zero RSA dependency.
 - [ ] **Post-Quantum FIDO2 / CTAP2 USB Key Integration:** Hardware-backed **ML-DSA-65** signatures and **ML-KEM-768** key encapsulation on open-source USB microcontrollers.
+- [ ] **Real-World Hardware Benchmarking:** Publish reproducible signing/encapsulation CPU cycle and latency benchmarks for `noeud_sss` servers and USB microcontrollers.
 - [ ] **Decentralized Static Node Replication & Anchoring:** Replicate signed static HTML/CSS files across decentralized nodes and anchor `.sss` registry state cryptographically.
-
 ---
 
 ## Core Engineering Challenges (Where We Need Help)
