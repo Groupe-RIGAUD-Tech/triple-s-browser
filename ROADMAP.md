@@ -46,11 +46,12 @@ Triple S is an operational, cross-platform B2B browser and protocol for **Window
 - [x] **Verified Corporate Identity Badge:** Gold trust banner for verified `.sss` domains, amber for unregistered, grey for standard `https://`.
 - [x] **Live Registry Hot-Reload (`🔄`):** Instant `registre.json` synchronization from the toolbar.
 
-### ✅ v2.0.0 — Post-Quantum Identity & Sovereign B2B Auth (Current Release)
-- [x] **Hybrid Post-Quantum Authentication (`sss-auth://`):** Passwordless **Ed25519 + ML-DSA-65 (NIST FIPS 204)** dual signatures with TOTP 2FA and anti-replay nonces.
-- [x] **Encrypted Local Vault (`.identite_sss.vault`):** Argon2id + AES-256-GCM local encryption, per-domain key derivation, and automatic RAM locking.
-- [x] **4 B2B Sovereign Workflows:** Registration, 2FA Login, Zero-Spam Contact, and Signed Purchase Validation (`0.00 EUR` demo).
-- [x] **Unified Bilingual Interface (`🌐 FR / EN`):** Single toolbar toggle translating the browser, local pages, client portal, and native consent dialogs.
+### 🚧 v2.1.0 — Signed Registry, Secure Updater & Turnkey B2B Kit (Next Release)
+- [ ] **ML-DSA-65 Signed Registry:** Cryptographic verification of `registre.json` using Groupe RIGAUD Tech's post-quantum public key to prevent tampering.
+- [ ] **In-App Verified Updater:** One-click update download from the version alert dialog with automatic local SHA-256 integrity verification.
+- [ ] **SBOM Transparency:** Publish a Software Bill of Materials (SBOM) alongside SHA-256 checksums for every GitHub Release to track third-party dependencies.
+- [ ] **Turnkey B2B Kit (`noeud_sss` & HTML-to-SSS Converter):** Reference port-1965 server kit and a one-command script to strip JS/trackers from existing HTML pages for instant `.sss` testing.
+- [ ] **Native Packaging:** `.AppImage` / `.deb` packages for Linux and EV code-signing for Windows.
 
 ### 🚧 v2.1.0 — Signed Registry & Dedicated Nodes (Next Release)
 - [ ] **ML-DSA-65 Signed Registry:** Cryptographic verification of `registre.json` using Groupe RIGAUD Tech's post-quantum public key to prevent tampering.
@@ -66,7 +67,8 @@ Triple S is an operational, cross-platform B2B browser and protocol for **Window
 ## Core Engineering Challenges (Where We Need Help)
 Contributions, security audits, and architectural critiques are welcome on the following topics:
 
-1. **Safe Media & Video Without JavaScript:** Explore native HTML5 `<video>` support using strictly sandboxed, static media formats without reintroducing tracking or script execution vectors.
+1. **Safe Media, Strict Image Filtering & Video Without JavaScript:**
+   Image parsers can be exploited even without JavaScript (e.g., `libwebp` / CVE-2023-4863). Goal: enforce a strict whitelist of allowed image formats on `sss://`, isolate media decoding, and explore sandboxed static HTML5 `<video>` streams without tracking vectors.
 2. **Post-Quantum Hardware Convergence (v3.0):** Offload **ML-DSA-65** signing and **ML-KEM-768** encapsulation to dedicated hardware USB keys.
 3. **Decentralized Static Replication:** Design a lightweight, signed static-file replication layer where nodes only cache verified HTML/CSS—eliminating malware execution risks.
 4. **Cross-Platform Packaging:** Clean native packages for Linux (`.AppImage` / `.deb`) and macOS, plus reproducible CI builds.
