@@ -7,21 +7,22 @@ The modern web has drifted away from its original purpose: sharing information s
 
 ---
 
-## Current Status (v2.0.0 — Public Release)
+## Current Status (v2.1.0 — Public Release)
 Triple S is an operational, cross-platform B2B browser and protocol for **Windows (64-bit)** and **Linux (x64)**.
 
 **What works today:**
 - PyQt6-based browser engine blocking JavaScript, plugins, and cookies on `sss://` domains.
-- Native post-quantum passwordless authentication (`sss-auth://`) using hybrid **Ed25519 + ML-DSA-65 (NIST FIPS 204)** dual signatures, **TOTP 2FA**, and one-time anti-replay nonces.
+- Native post-quantum passwordless authentication (`sss-auth://`) using hybrid **Ed25519 + ML-DSA-65 (NIST FIPS 204)** dual signatures, **TOTP 2FA with offline QR code enrollment (`segno`)**, and one-time anti-replay nonces.
 - Local encrypted vault (`.identite_sss.vault`, **Argon2id + AES-256-GCM**, 12-char min. passphrase) with per-domain key derivation and automatic RAM locking after every action.
 - 4 sovereign B2B workflows in the built-in Client Portal Demo: Cryptographic Registration, 2FA Login with granular consent, Zero-Spam Company Contact, and Signed Purchase Validation (`0.00 EUR` simulation).
-- Sovereign remote registry (`registre.json`) mapping `.sss` domains to verified corporate legal IDs (SIRET, EU VAT, Swiss UID, D-U-N-S) with permanent B2B Trust Banner and Zero-JS Directory (`sss://annuaire.sss`).
+- Sovereign remote registry (`registre.json` + **ML-DSA-65 cryptographic signature `registre.json.sig`**) mapping `.sss` domains to verified corporate legal IDs (SIRET, EU VAT, Swiss UID, D-U-N-S) with permanent B2B Trust Banner and Zero-JS Directory (`sss://annuaire.sss`).
 - Hybrid `https_statique` hosting mode with automatic `<base href>` injection and built-in Zero-JS `.sss` domain reservation template.
 - Unified bilingual UI (**FR / EN**) with OS locale detection and single-button toolbar switcher (`🌐 FR / EN`).
-- Verifiable pre-built binaries for Windows 64-bit and Linux x64 (SHA-256 checksums published).
+- Verifiable pre-built **Windows 64-bit Installer (Inno Setup)** and **Linux x64 binary**, published with **SHA-256 checksums** and a **CycloneDX SBOM (`sbom-v2.1.0.json`)**.
 
 **Known limitations (honest list):**
-- Windows executable is not yet EV code-signed (triggers Windows SmartScreen).
+- Windows installer is not yet EV code-signed (triggers Windows SmartScreen).
+- Linux users on Ubuntu/Wayland may need to launch with `QT_QPA_PLATFORM=xcb`.
 - Software-stored local vault (hardware FIDO2/CTAP2 post-quantum USB key support is planned for v3.0).
 - No native video streaming support yet.
 - macOS builds and native Linux packages (`.AppImage` / `.deb`) are not packaged yet.
@@ -46,16 +47,21 @@ Triple S is an operational, cross-platform B2B browser and protocol for **Window
 - [x] **Verified Corporate Identity Badge:** Gold trust banner for verified `.sss` domains, amber for unregistered, grey for standard `https://`.
 - [x] **Live Registry Hot-Reload (`🔄`):** Instant `registre.json` synchronization from the toolbar.
 
-### 🚧 v2.1.0 — Signed Registry, Secure Updater & Turnkey B2B Kit (Next Release)
-- [ ] **ML-DSA-65 Signed Registry:** Cryptographic verification of `registre.json` using Groupe RIGAUD Tech's post-quantum public key to prevent tampering.
-- [ ] **In-App Verified Updater:** One-click update download from the version alert dialog with automatic local SHA-256 integrity verification.
-- [ ] **SBOM Transparency:** Publish a Software Bill of Materials (SBOM) alongside SHA-256 checksums for every GitHub Release to track third-party dependencies.
-- [ ] **Turnkey B2B Kit (`noeud_sss` & HTML-to-SSS Converter):** Reference port-1965 server kit and a one-command script to strip JS/trackers from existing HTML pages for instant `.sss` testing.
-- [ ] **Native Packaging:** `.AppImage` / `.deb` packages for Linux and EV code-signing for Windows.
+### ✅ v2.0.0 — Post-Quantum Auth & Local Vault (Shipped)
+- [x] **Hybrid Post-Quantum Authentication (`sss-auth://`):** Ed25519 + ML-DSA-65 dual signatures with anti-replay nonces and TOTP 2FA.
+- [x] **Encrypted Local Vault:** Argon2id + AES-256-GCM storage with per-domain key derivation and automatic RAM locking.
+- [x] **B2B Client Portal Demo:** 4 interactive sovereign workflows (Registration, 2FA Login, Zero-Spam Contact, Signed Purchase).
 
-### 🚧 v2.1.0 — Signed Registry & Dedicated Nodes (Next Release)
-- [ ] **ML-DSA-65 Signed Registry:** Cryptographic verification of `registre.json` using Groupe RIGAUD Tech's post-quantum public key to prevent tampering.
-- [ ] **Production `noeud_sss` Deployments:** Reference server kit for companies hosting their own port-1965 sovereign portals.
+### ✅ v2.1.0 — Signed Registry, Offline 2FA QR Code & SBOM (Shipped)
+- [x] **ML-DSA-65 Signed Registry (`registre.json.sig`):** Post-quantum signature verification of the `.sss` registry to prevent tampering.
+- [x] **Offline 2FA QR Code Enrollment:** Native QR code generation (`segno`) inside the browser for instant authenticator app pairing.
+- [x] **SBOM Transparency:** CycloneDX Software Bill of Materials (`sbom-v2.1.0.json`) published alongside SHA-256 checksums.
+- [x] **Windows Installer:** Dedicated Inno Setup installer (`installer_triple_s.exe`) with branded icon.
+
+### 🚧 v2.2.0 — Secure Updater, Turnkey B2B Kit & Native Packaging (Next Release)
+- [ ] **In-App Verified Updater:** One-click update download from the version alert dialog with automatic local SHA-256 integrity verification.
+- [ ] **Turnkey B2B Kit (`noeud_sss` & HTML-to-SSS Converter):** Reference port-1965 server kit and a one-command script to strip JS/trackers from existing HTML pages for instant `.sss` testing.
+- [ ] **2FA UX & Wayland Polish:** Highlighted 2FA input field in the consent dialog and smoother native Wayland fallback on Linux.
 - [ ] **Native Packaging:** `.AppImage` / `.deb` packages for Linux and EV code-signing for Windows.
 
 ### 🛡️ v3.0.0 — Post-Quantum Hardware & Decentralized Anchoring
