@@ -1,3 +1,6 @@
+Voici ton `README.md` mis à jour pour la **v2.1.0** (FR + EN), aligné avec ta Roadmap et ta Release GitHub :
+
+```markdown
 # 🛡️ Triple S Browser (`sss://`) — Sovereign Static Web & Post-Quantum Identity
 
 [![Version](https://img.shields.io/badge/Version-2.1.0-D4AF37?style=for-the-badge)](https://github.com/Groupe-RIGAUD-Tech/triple-s-browser/releases)
@@ -37,3 +40,72 @@ Téléchargez les binaires vérifiés (installeur Windows 64-bit `installer_trip
 ```bash
 chmod +x TripleS-Browser-v2.1.0-linux-x64
 QT_QPA_PLATFORM=xcb ./TripleS-Browser-v2.1.0-linux-x64
+
+```
+
+### Offre de Lancement Entreprises
+
+Les **1 000 premiers noms de domaine `.sss` sont attribués gratuitement la première année** (1 domaine par entreprise vérifiée).
+
+📩 Contact & pré-réservation : `contact@grouperigaudtech.fr`
+
+### Licence & Propriété Intellectuelle
+
+Ce projet est distribué sous licence **Source-Available** (voir le fichier [`LICENSE`](https://www.google.com/search?q=LICENSE)) et protégé par un **dépôt e-Soleau auprès de l'INPI**. Le code est ouvert à l'audit de sécurité ; toute copie ou exploitation commerciale sans autorisation écrite est interdite.
+
+---
+
+## 🇬🇧 English Version
+
+### What is Triple S Browser?
+
+**Triple S** is a sovereign browser and native network protocol (`sss://`, TCP port 1965) built for critical infrastructures, businesses, and the post-quantum era.
+
+Unlike conventional browsers that execute complex dynamic code on every page load, Triple S enforces a strict architectural rule: **zero JavaScript, zero plugins, zero cookies, and zero executables on `sss://` domains**.
+
+### Core Features (V2.1.0)
+
+* **Native Post-Quantum Authentication (`sss-auth://`):** Passwordless authentication powered by hybrid **Ed25519 + ML-DSA-65 (NIST FIPS 204)** dual signatures, **TOTP 2FA with offline QR code enrollment (`segno`)**, and one-time anti-replay nonces.
+* **ML-DSA-65 Signed Registry (`registre.json.sig`):** Post-quantum cryptographic verification of the official `.sss` registry to prevent tampering, mapping domains to verified corporate legal IDs (SIRET, EU VAT, UID, D-U-N-S) with the built-in `sss://annuaire.sss` directory.
+* **Local Encrypted Vault (`.identite_sss.vault`):** 256-bit master key and user profile encrypted locally (**Argon2id + AES-256-GCM**), per-domain key derivation, and automatic RAM locking after every action.
+* **4 Sovereign B2B Workflows (Client Portal Demo):** Cryptographic registration, 2FA login with granular consent, zero-spam company contact, and signed purchase validation (`0.00 EUR` simulation).
+* **Supply-Chain Transparency:** Dedicated Windows 64-bit Installer (Inno Setup), Linux x64 binary, **SHA-256** checksums, and a **CycloneDX SBOM (`sbom-v2.1.0.json`)** published with every release.
+* **Zero-Knowledge Architecture:** Zero central database. Groupe RIGAUD Tech never collects or stores private keys or personal data.
+
+### Roadmap
+
+* **v2.1 (Current):** ML-DSA-65 signed registry, offline 2FA QR code enrollment, dedicated Windows installer, and CycloneDX SBOM.
+* **v2.2:** In-app SHA-256 verified updater, turnkey B2B kit (`noeud_sss` + HTML-to-SSS converter), and native Linux packages (`.AppImage` / `.deb`).
+* **v3.0:** Post-quantum FIDO2/CTAP2 hardware USB key integration, decentralized static node replication, and cryptographic registry anchoring.
+
+### Download & Installation
+
+Download the verifiable binaries (Windows 64-bit installer `installer_triple_s.exe` & Linux x64 binary `TripleS-Browser-v2.1.0-linux-x64`, with SHA-256 checksums and SBOM):
+
+👉 **[Download from Releases](https://github.com/Groupe-RIGAUD-Tech/triple-s-browser/releases)** *(or via [grouperigaudtech.fr](https://www.grouperigaudtech.fr/telechargement.html))*.
+
+*Linux Note (Ubuntu / Wayland):*
+
+```bash
+chmod +x TripleS-Browser-v2.1.0-linux-x64
+QT_QPA_PLATFORM=xcb ./TripleS-Browser-v2.1.0-linux-x64
+
+```
+
+### Early-Adopter Business Offer
+
+The **first 1,000 `.sss` domain names are granted free of charge for the first year** (limit 1 domain per verified company).
+
+📩 Registration & inquiries: `contact@grouperigaudtech.fr`
+
+### License & Intellectual Property
+
+This project is distributed under a **Source-Available** license (see [`LICENSE`](https://www.google.com/search?q=LICENSE)) and protected by an **INPI e-Soleau filing**. Source code is open for security auditing; commercial use or redistribution without prior written permission is prohibited.
+
+---
+
+**Édité par / Published by:** Groupe RIGAUD Tech SASU — Sophia Antipolis, France
+
+```
+
+```
